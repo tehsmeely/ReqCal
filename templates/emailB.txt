@@ -1,0 +1,9 @@
+Hello,
+
+A request made by {{ data.specialUser }} on {{ data.day }} {{ data.month }} {{ data.year }} has changed status to {{ data.status }}
+
+Description of request: "{{ data.description }}"
+
+Regards,
+
+Request Calendar

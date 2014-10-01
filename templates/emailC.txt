@@ -1,0 +1,9 @@
+Hello,
+
+A request has been made by {{ data.specialUser }} on {{ data.day }} {{ data.month }} {{ data.year }}.
+
+Description of request: "{{ data.description }}"
+
+Regards,
+
+Request Calendar

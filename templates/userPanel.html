@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<script>
+	$(function(){
+
+
+		$('#changeEmail').click(function(){
+
+			// prompt for email, if cancel is clicked, dont submit
+			var form = $('#emailForm1');
+			var email = prompt("Please enter new email address", "");
+			if (email == null){return false;}
+
+			$("#submitVal_email").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+			var input = $("<input>")
+				.attr("type", "hidden")
+				.attr("id", "submitVal_email")
+				.attr("name", "email")
+				.val(email);
+
+			form.append($(input));
+			form.submit();
+
+		})
+
+		$('#changePassword').click(function(){
+			// prompt for email, if cancel is clicked, dont submit
+			var form = $('#changePasswordForm');
+			var password = prompt("Please enter new password", "");
+			if (password == null){return false;}
+
+			$("#submitVal_password").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+			var input = $("<input>")
+				.attr("type", "hidden")
+				.attr("id", "submitVal_password")
+				.attr("name", "password")
+				.val(password);
+
+			form.append($(input));
+			form.submit();
+
+		})
+
+
+
+	})
+
+</script>
+
+{% endblock %}
+
+
+<!-- override login button -->
+{% block loginButton %}{% endblock %} 
+
+{% block body %}
+<div style="text-align: center">
+
+	<p>User Panel for {{ login[1] }}</p>
+
+	<form id="changePasswordForm" method="post" action="{{ url_for('userPanel') }}">
+	<button id="changePassword">Change Password</button>
+	</form>
+
+
+	<br><br><br><br>
+
+
+	{% if email != None %}
+		<p>Currently attached email is: {{email}}<br>
+		<form id="emailForm1" method="post" action="{{ url_for('userPanel') }}">
+		<button id="changeEmail">Change Email Address</button></p>
+		</form>
+
+		<form method="post" action="{{ url_for('userPanel') }}">
+			<input type="hidden" name="notificationSettings"> 
+			<input type="checkbox" name="notif" value="A" {% if 'A' in notifSettings %}checked{% endif %}>on your request status changes<br>
+			<input type="checkbox" name="notif" value="B" {% if 'B' in notifSettings %}checked{% endif %}>on others' request status changes<br>
+			<input type="checkbox" name="notif" value="C" {% if 'C' in notifSettings %}checked{% endif %}>on new request creation<br>
+			<input type="submit" value="Update Notification Settings">
+		</form>
+
+
+	{% else %}
+		<p>You have not set an email so cannot receive notifications</p>
+		<form id="emailForm2" method="post" action="{{ url_for('userPanel') }}">
+			Email: <input type="text" name="email"><input type="submit" value="Set Email">
+		</form>
+	{% endif %}
+
+
+
+
+
+</div>
+{% endblock %}

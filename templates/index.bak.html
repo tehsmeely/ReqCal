@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<title>Calendar</title>
+	
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	
+	<script src="{{ url_for('static', filename='jquery-2.1.1.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+	<script>
+		$(function(){
+			// Form submit, adds hidden element that transfers data of stored date (only if current month)
+			$("tbody td").each(function(){
+				console.log("foo");
+				$(this).click(function(){
+					if (!$(this).hasClass("other-month"))
+					{
+						console.log($(this).text());
+						//$('#subform').val({ 'day' : $(this).text(), 'month' : '{{ month }}'});
+						$("#submitVal").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+						var input = $("<input>")
+							.attr("type", "hidden")
+							.attr("id", "submitVal")
+							.attr("name", "dayMon").val($(this).text()+"#{{ month }}")
+						$('#subform').append($(input));
+						$('#subform').submit();
+					}
+				});
+			});
+			
+			// form submit, for prev and next month arrows
+			
+			
+			
+			
+			//Set current day
+			console.log("{{today}}");
+			
+			// filters for correct day number and not other month, sets to current day class
+			{% if today != None %}
+			$('td').filter(function(){
+				return $(this).text() == "{{today}}" && !$(this).hasClass("other-month");
+				}).addClass("current-day");
+			{% endif %}
+				
+			console.log({{events|safe}});
+			var events = {{events|safe}};
+			console.log(events['pend'])
+			var day;
+			for (day in events['pend'])
+			{
+				var dayNum = events['pend'][day];
+				$('td').filter(function(){
+				return $(this).text() == dayNum && !$(this).hasClass("other-month");
+				}).addClass("pend");
+			}
+			for (day in events['conf'])
+			{
+				var dayNum = events['conf'][day];
+				$('td').filter(function(){
+				return $(this).text() == dayNum && !$(this).hasClass("other-month");
+				}).addClass("event");
+			}
+			
+		});
+	</script>
+
+</head>
+<body>
+	<div style="text-align: right;">
+	{% if login[0] -%} You are logged in as {{ login[1] }}  <a href="{{ url_for('logout') }}"><img class="logIcon" src="{{ url_for('static', filename='exit.png') }}"></a>
+	{%- else -%}
+	You are not currently logged in: <a href="{{ url_for('login') }}"><img class="logIcon" src="{{ url_for('static', filename='entrance.png') }}"> Log In</a>{%- endif %}
+	</div>
+	<br>
+	<div class="container">
+		
+		<form id="subform" method="post" action="{{ url_for('dayInfo') }}">
+			<div class="calendar">
+
+				<header>				
+
+					<h2>{{ month }}</h2>
+
+					<a class="btn-prev fontawesome-angle-left" href="{{url_for('prevMonth')}}"></a>
+					<a class="btn-next fontawesome-angle-right" href="{{url_for('nextMonth')}}"></a>
+					
+
+				</header>
+				<table>
+				
+					<thead>
+						
+						<tr>
+							
+							<td>Mo</td>
+							<td>Tu</td>
+							<td>We</td>
+							<td>Th</td>
+							<td>Fr</td>
+							<td>Sa</td>
+							<td>Su</td>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+					
+						{% if today != None %}<div id='ordify'>{{today}}</div>{% endif %}
+						{% if today == None %}<a href="{{ url_for('currMonth') }}"><img src="{{ url_for('static', filename='homeCal.png') }}"></a>{% endif %}
+						
+						<!-- "other-month" class is invoked if the date is >10 (if is end dates from previous month ~30) -->
+						<tr>
+							<td class="{% if (days[0] > 10) -%} other-month {%- endif %}">{{ days[0] }}</td>
+							<td class="{% if (days[1] > 10) -%} other-month {%- endif %}">{{ days[1] }}</td>
+							<td class="{% if (days[2] > 10) -%} other-month {%- endif %}">{{ days[2] }}</td>
+							<td class="{% if (days[3] > 10) -%} other-month {%- endif %}">{{ days[3] }}</td>
+							<td class="{% if (days[4] > 10) -%} other-month {%- endif %}">{{ days[4] }}</td>
+							<td class="{% if (days[5] > 10) -%} other-month {%- endif %}">{{ days[5] }}</td>
+							<td class="{% if (days[6] > 10) -%} other-month {%- endif %}">{{ days[6] }}</td>
+						</tr>
+						<tr>
+							<td>{{ days[7] }}</td>
+							<td>{{ days[8] }}</td>
+							<td>{{ days[9] }}</td>
+							<td>{{ days[10] }}</td>
+							<td>{{ days[11] }}</td>
+							<td>{{ days[12] }}</td>
+							<td>{{ days[13] }}</td>
+						</tr>
+						<tr>
+							<td>{{ days[14] }}</td>
+							<td>{{ days[15] }}</td>
+							<td>{{ days[16] }}</td>
+							<td>{{ days[17] }}</td>
+							<td>{{ days[18] }}</td>
+							<td>{{ days[19] }}</td>
+							<td>{{ days[20] }}</td>
+						</tr>
+						<tr>
+							<td>{{ days[21] }}</td>
+							<td>{{ days[22] }}</td>
+							<td>{{ days[23] }}</td>
+							<td>{{ days[24] }}</td>
+							<td>{{ days[25] }}</td>
+							<td>{{ days[26] }}</td>
+							<td>{{ days[27] }}</td>
+						</tr>
+
+						<tr>
+							<td>{{ days[28] }}</td>
+							<td>{{ days[29] }}</td>
+							<td>{{ days[30] }}</td>
+							<td class="{% if (days[31] < 15) -%} other-month {%- endif %}">{{ days[31] }}</td>
+							<td class="{% if (days[32] < 15) -%} other-month {%- endif %}">{{ days[32] }}</td>
+							<td class="{% if (days[33] < 15) -%} other-month {%- endif %}">{{ days[33] }}</td>
+							<td class="{% if (days[34] < 15) -%} other-month {%- endif %}">{{ days[34] }}</td>
+						</tr>
+						<tr>
+							<td class="{% if (days[35] < 15) -%} other-month {%- endif %}">{{ days[35] }}</td>
+							<td class="{% if (days[36] < 15) -%} other-month {%- endif %}">{{ days[36] }}</td>
+							<td class="{% if (days[37] < 15) -%} other-month {%- endif %}">{{ days[37] }}</td>
+							<td class="{% if (days[38] < 15) -%} other-month {%- endif %}">{{ days[38] }}</td>
+							<td class="{% if (days[39] < 15) -%} other-month {%- endif %}">{{ days[39] }}</td>
+							<td class="{% if (days[40] < 15) -%} other-month {%- endif %}">{{ days[40] }}</td>
+							<td class="{% if (days[41] < 15) -%} other-month {%- endif %}">{{ days[41] }}</td>
+						</tr>
+
+					</tbody>
+
+				</table>
+
+			</div> <!-- end calendar -->
+		</form>
+	</div> <!-- end container -->
+	
+</body>
+</html>

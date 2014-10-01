@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+	{% block head %}
+	<style>
+		.centerTable tr {text-align: center}
+	</style>
+
+
+	<script>
+		$(function(){
+
+
+			// $('#currUserForm').submit(function(){
+			// 		var username = $("input[type=submit]:focus").attr('id')
+			// 		//var username = $("input[type=submit][clicked=true]").val()
+			// 		console.log(username);
+
+			// 		$("#submitVal").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+			// 		var input = $("<input>")
+			// 			.attr("type", "hidden")
+			// 			.attr("id", "submitVal")
+			// 			.attr("name", "delUser").val(username);
+			// 		$(this).append($(input));
+			// 		return false;
+			// });
+
+			// Change password buttons
+			$("input[type=button][funct='changePass']").each(function(){
+				
+				$(this).click(function(){
+					// on click, get password, add hidden input to inform app: "changePass" key is checked-for in request form data, then values are used if seen
+					// 'changePass': Username, 'newPass': newPassword
+					console.log($(this).attr('user'));
+					var form = $('#currUserForm');
+					var newPass = prompt("Please enter new password", "");
+					if (newPass == null){return false;}
+						
+					$("#submitVal_changePass").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+					var input = $("<input>")
+						.attr("type", "hidden")
+						.attr("id", "submitVal_changePass")
+						.attr("name", "changePass")
+						.val($(this).attr('user'));
+					var input2 = $("<input>")
+						.attr("type", "hidden")
+						.attr("id", "submitVal_changePass")
+						.attr("name", "newPass")
+						.val(newPass);
+					form.append($(input));
+					form.append($(input2));
+					form.submit();
+					
+				});
+			});
+
+			// Delete a user, with confirm box
+			$("input[type=button][funct='delUser']").each(function(){
+				
+				$(this).click(function(){
+					// on click, get password, add hidden input to inform app: "changePass" key is checked-for in request form data, then values are used if seen
+					// 'changePass': Username, 'newPass': newPassword
+					var user = $(this).attr('user')
+					console.log(user);
+					var form = $('#currUserForm');
+					if (!(confirm("Are you sure you want to delete " + user + "?"))){return false;}
+						
+					$("#submitVal_delUser").remove(); // remove previous if extant, necessary if submit is called then back pressed, input will still exist from previous submit
+					var input = $("<input>")
+						.attr("type", "hidden")
+						.attr("id", "submitVal_delUser")
+						.attr("name", "delUser")
+						.val(user);
+					form.append($(input));
+					form.submit();
+					
+				});
+			});
+
+		});
+
+
+	</script>
+
+	{% endblock %}
+
+{% block loginButton %}{% endblock %} <!-- back button removal by override -->
+
+{% block body %}
+	<div style="text-align:center;">
+		{{ userList }}
+		<table align="center" class="centerTable">
+			<tr>
+				<td>UserName</td>
+				<td>Password[f]</td>
+				<td>Add/Remove[f]</td>
+			</tr>
+			<form id="currUserForm" method="post" action="{{ url_for('adminPanel') }}">
+			</form>
+			<!-- custom first slot for admin, with greyed out delete, better this way than checking every user==admin with jinja -->
+			<tr>
+				<td>Admin</td>
+				<td><input type="button" funct="changePass" value="Change Password" user="Admin"></td>
+				<td><button disabled>Delete User</button></td>
+			</tr>
+			
+			{% for  user in userList %}
+				<tr>
+					<td>{{ user }}</td>
+					<td> <input type="button" funct="changePass" value="Change Password" user="{{user}}"></td>
+					<td> <input type="button" funct="delUser" value="Delete User" user="{{user}}"></td>
+				</tr>
+			
+			{% endfor %}
+
+			<form id="newUserForm" method="post" action="{{ url_for('adminPanel') }}">
+				<tr>
+				
+					<td><input type="text" name="newUser"></td>
+					<td><input type="text" name="newPass"></td>
+					<td><input type="submit" name="addUser" value="Add User">
+
+				</tr>
+			</form>
+		</table>
+
+		{% if message %}
+		<p> Message: {{message}} </p>
+		{% endif %}
+		{% if error %}
+		<p> Error: {{error}} </p>
+		{% endif %}
+
+
+	</div>
+{% endblock %}

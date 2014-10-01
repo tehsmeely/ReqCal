@@ -1,0 +1,39 @@
+<head>
+	<meta charset="UTF-8">
+	<title>Calendar</title>
+	
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:300,400,700">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	
+	<style>
+		.levelIcon {position: relative; left: 15px; top: 3px;}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+	
+		<br>
+			<div style="text-align:center;">
+			{% if logged_in != None %}
+				You are currently logged in as {{logged_in}}
+					<a href="{{ url_for('logout') }}"><button>Log Out</button></a>
+			{% else %}
+			<form method="post" action="{{ url_for('login') }}">
+				<br>
+				Username: <input type="text" name="username">
+
+				Password:  <input type="password" name="password">
+				<br>
+				{% if error %} <p>{{ error }}</p> {% endif %}
+				<br>
+				<input type="submit" value="Log In"/>
+			</div>
+			</form>
+		<br><br>
+	
+	
+	
+	
+	</div>
+</body>

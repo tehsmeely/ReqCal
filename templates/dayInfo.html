@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<script>
+		$(function(){
+
+			$('#reqFormButton').click(function(){
+				console.log("button clicked");
+				$('#reqForm').slideToggle(function(){
+					console.log("anim finished");
+				});
+
+			});
+
+
+
+		});
+	</script>
+	<style>
+		#reqForm
+			{ 
+				display:none;
+			}
+		#reqFormButton
+			{
+				cursor: pointer;
+			}
+	</style>
+{% endblock %}
+
+{% block body %}
+	<div style="text-align:center;">
+		<p>{{ year }}</p>
+
+		<b>{{ month[1] }}</b>
+
+		<br>
+
+		<b id='ordify'>{{ day }}</b>
+
+		<br><br>
+
+
+		<!-- dayData = event Description, confNameList, userStatus, requestStatus -->
+
+
+		{% if dayData != None %}
+		<!-- day data: show list of users and stati, allow user to set personal status if isnt event creator -->
+			<p>Request made by <b>{{ claimer }}</b></p>
+			<br>
+			<p>Request Description:</p>
+			<p>"{{ dayData[0] }}"</p>
+
+			<br>
+
+			<p>Overall Status: {{dayData[3][0]}}<img class="levelIcon" src="{% if dayData[3][1] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif dayData[3][1]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></p>
+			<br>
+			<u>Users</u>
+			<ul class='custList'>
+			{% for nameTup in dayData[1] %}
+				<li> {{ nameTup[0] }}  <img class="levelIcon" src="{% if nameTup[1] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif nameTup[1] == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}">
+			{% endfor %}
+			</ul>
+
+			{% if dayData[2] != None -%}
+				<p>You are currently: {{dayData[2][0]}} <img class="levelIcon" src="{% if dayData[2][1] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif dayData[2][1] == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></p>
+				<a href="{{ url_for('dayInfoUpdate', year=year, month=month[0], day=day, user=login[1], status=1) }}"><button>Confirm</button></a><a href="{{ url_for('dayInfoUpdate', year=year, month=month[0], day=day, user=login[1], status=-1) }}"><button>Deny</button></a>
+			{%- endif %}
+				
+		{% else %}
+		<!-- No Day Data, display such and offer to make request -->
+			<p>No requests exist for today</p>
+			
+			{% if login[0] -%}
+
+
+			<p>You can make a request for today</p>
+			<img id="reqFormButton" src="{{ url_for('static', filename='flag.png') }}">
+			<div id="reqForm">
+				<form method="post" action="{{ url_for('addRequest') }}">
+					<input type="hidden" name="dmy" value="{{day}}#{{month[0]}}#{{year}}">
+					<p>Description:</p>
+					<textarea name="desc"></textarea>
+					<br>
+					<input type="submit" value="Make Request">
+				</form>
+			</div>
+
+
+			{%- else -%}
+
+
+			You cannot make a request as you are not logged in
+
+
+			{%- endif %}	
+				
+				
+		{% endif %}
+
+
+		<p>Day Data is: {{dayData|safe}}</p>
+	</div>
+{% endblock %}

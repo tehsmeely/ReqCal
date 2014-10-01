@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ---------- FONTAWESOME ---------- */
+/* ---------- http://fortawesome.github.com/Font-Awesome/ ---------- */
+/* ---------- http://weloveiconfonts.com/ ---------- */
+
+@import url(http://weloveiconfonts.com/api/?family=fontawesome);
+
+*[class*="fontawesome-"]:before {
+  font-family: 'FontAwesome', sans-serif;
+}
+
+/* ---------- GENERAL ---------- */
+
+body {
+	background: #f9f9f9;
+	color: #0e171c;
+	font: 300 100%/1.5em 'Lato', sans-serif;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+h2 {
+	font-size: 2em;
+	line-height: 1.25em;
+	margin: .25em 0;
+}
+
+h3 {
+	font-size: 1.5em;
+	line-height: 1em;
+	margin: .33em 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.container {
+	height: 538px;
+	left: 50%;
+	margin: -255px 0 0 -245px;
+	position: absolute;
+	top: 50%;
+	width: 510px;
+}
+
+/* ---------- CALENDAR ---------- */
+
+.calendar {
+	text-align: center;
+}
+
+.calendar header {
+	position: relative;
+}
+
+.calendar h2 {
+	text-transform: uppercase;
+}
+
+.calendar thead {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.calendar thead td {
+	cursor:default;
+	}
+
+.calendar tbody {
+	color: #7c8a95;
+}
+
+.calendar tbody td {
+	cursor: pointer;
+	}
+
+.calendar tbody td:hover {
+	border: 2px solid #00addf;
+}
+
+.calendar td {
+	border: 2px solid transparent;
+	border-radius: 50%;
+	display: inline-block;
+	height: 4em;
+	line-height: 4em;
+	text-align: center;
+	width: 4em;
+}
+
+
+.calendar .other-month {
+	color: #cbd1d2;
+}
+
+.calendar .other-month:hover {
+	border: 2px solid #cbd1d2;
+}
+
+.current-day {
+	background: #00addf;
+	color: #f9f9f9;
+}
+
+
+
+.event {
+	cursor: pointer;
+	position: relative;
+}
+
+.event:after {
+	background: #00ff00;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+
+.pend {
+	cursor: pointer;
+	position: relative;
+}
+
+.pend:after {
+	background: #ff6600;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+	
+.denied {
+	cursor: pointer;
+	position: relative;
+}
+
+.denied:after {
+	background: #ff0000;
+	border-radius: 50%;
+	bottom: .5em;
+	display: block;
+	content: '';
+	height: .5em;
+	left: 50%;
+	margin: -.25em 0 0 -.25em;
+	position: absolute;
+	width: .5em;
+}
+
+
+
+
+.btn-prev,
+.btn-next {
+	border: 2px solid #cbd1d2;
+	border-radius: 50%;
+	color: #cbd1d2;
+	height: 2em;
+	font-size: .75em;
+	line-height: 2em;
+	margin: -1em;
+	position: absolute;
+	top: 50%;
+	width: 2em;
+}
+
+.btn-prev:hover,
+.btn-next:hover {
+	background: #cbd1d2;
+	color: #f9f9f9;
+}
+
+.btn-prev {
+	left: 6em;
+}
+
+.btn-next {
+	right: 6em;
+}
+
+.levelIcon {position: relative; left: 15px; top: 3px;}
+.logIcon {position: relative; top: 3px;}
+
