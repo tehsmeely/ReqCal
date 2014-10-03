@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+
+{% block body %}
+	
+
+	<h2>Legend</h2>
+	Some buttons use symbols, these are explained here
+	<table>
+	<tr>
+		<td><img src="{{ url_for('static', filename='entrance.png') }}"></td><td>Log In</td>
+	</tr><tr>
+		<td><img src="{{ url_for('static', filename='exit.png') }}"></td><td>Log Out</td>
+	</tr><tr>
+		<td><img src="{{ url_for('static', filename='backward.png') }}"></td><td>Back to Calendar Page</td>
+	</tr><tr>
+		<td><img src="{{ url_for('static', filename='homeCal.png') }}"></td><td>Back to current month</td>
+	</tr><tr>
+		<td><img src="{{ url_for('static', filename='flag.png') }}"></td><td>Make Request</td>
+	</tr>
+	</table>
+	<h2>Usage</h2>
+	<ul>
+		<li>Log in by clicking the login button at the top right</li>
+		<li>Enter your username and password and click log in</li>
+		<li>Now on the calendar, coloured dots indicate if a request exists on this day and its status
+			<ul>
+				<li style="color: #00ff00;">Green: request confirmed by all users</li>
+				<li style="color: #ff6600;">Orange: Request is still pending for one or more users</li>
+				<li style="color: #ff0000;">Red: One or more users have denied this request</li>
+			</ul>
+		</li>
+		<li>Clicking on a day will take you to the day information page</li>
+		<li>If a request exists for this day, you can see the information, and edit if it is your request</li>
+		<li>From this page you can change your status (confirm/deny) for someone else's request</li>
+		<li>If no request exists on the day, you can create one by clicking the "Make Request" button and entering a description</li>
+		<li>Most of this info is available if not logged in, but no settings can be changed</li>
+		<li>There is a user page, to change your password, set or change password, and edit notification setting (if email is set)</li>
+		{% if adminEmail %}
+		<li>For more help contact the site admin at: {{ adminEmail }}
+		{% endif %}
+	</ul>
+
+{% endblock %}

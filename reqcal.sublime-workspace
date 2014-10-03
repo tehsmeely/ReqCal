@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getLogin"
+			],
+			[
+				"week",
+				"WEEKDAYS"
+			],
+			[
 				"eventC",
 				"eventClaim"
 			],
@@ -184,22 +192,28 @@
 	"buffers":
 	[
 		{
-			"contents": "import time,os.path, sqlite3, datetime, calendar\nfrom flask import Flask, render_template, request, redirect, url_for, session, g\nfrom werkzeug import check_password_hash, generate_password_hash\n\nMONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']\nMONTHLEN = [31,28,31,30,31,30,31,31,30,31,30,31]\n## months go 0-11, and index directly the other data\n\n\n\n\napp = Flask(__name__)\napp.config.update(dict(\n    DATABASE=os.path.join(app.root_path, 'events.db'),\n    DEBUG=True,\n    SECRET_KEY='workingkey',\n    USE_EMAIL=True,\n    MAIL_SERVER = 'smtp.gmail.com',\n    MAIL_PORT = 465,\n    MAIL_USE_TLS = False,\n    MAIL_USE_SSL = True,\n    MAIL_USERNAME = 'request.calendar.noreply@gmail.com',\n    MAIL_PASSWORD = 'Request30Calendar'\n))\n\nif app.config['USE_EMAIL']:\n	from flask.ext.mail import Mail, Message\n	mail = Mail(app)\n\n## days[] is an array of fixed length 42, including all the days of the current month,\n##  as well as buffers from other months to make up 42, can can be made using\n##  month length and start day\n\n@app.route('/', methods=['POST', 'GET'])\ndef index():\n	today = datetime.date.today()\n	if 'month' in session:\n		month = session.get('month')\n	else:\n		month = today.month-1\n		session['month'] = month\n	if 'year' in session:\n		year = session.get('year')\n	else:\n		year = today.year\n		session['year'] = year\n	\n	monthName = MONTHS[month]\n	days = genDays(month, year)\n	if month == today.month-1 and year == today.year:\n		todayDate = today.day\n	else:\n		todayDate = None\n\n	if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)\n\n	## events is then a dict, containing list of dates with pending and list of those with confirm\n	return render_template(\"index.html\", year=year, month=monthName, days=days, today=todayDate, events=get_monthEvents(month, year), login=login)\n	#{'pend':[20, 22, 23, 30], 'conf':[1, 12, 17, 19, 21]}\n\n@app.route('/dayInfo', methods=['POST', 'GET'])\ndef dayInfo():\n	print request.method\n\n	showInfo = None\n	if request.method == 'POST':\n		## Request dict comes as {'dayMon': day#month}\n		showInfo = request.form.get('dayMon').split('#')\n		session['dayInfo'] = showInfo\n	##also store most request requst into session for resuming\n	elif \"dayInfo\" in session:\n		showInfo = session['dayInfo']\n	\n\n	print \"DAY INFO\"\n\n	if showInfo is not None:\n		\n		year = session.get('year', datetime.date.today().year)\n		\n		day, month = showInfo\n		monthNum = MONTHS.index(month)\n\n		if session.get('logged_in', 0):\n			login = (1, session.get('username', \"NAMENOTFOUND\"))\n		else:\n			login = (0, None)\n\n\n		dayData = get_dayData(day, monthNum, year)\n		#(eventClaimer, eventDescription, eventConfirms, eventDenies)\n\n		##init template vars to None\n		claimer = None\n\n		if dayData is not None:\n			\n			##the username of the claimer, the description of the event\n			##and two lists of usernames of those confirmed and denied\n			# and only others from userList will be \"pending\"\n			##there should be no overlap between confirm and deny lists\n			# should be checked when status is changed.\n			# but confirm takes presidence if there is overlap\n			claimer, eventDescription, eventConfirms, eventDenies = dayData\n\n			eventConfirms = eventConfirms.split(',')\n			eventDenies = eventDenies.split(',')\n\n			\n			userStati = [] #preserve stati for overall status calculation\n\n			## Get a list of users\n			if hasattr(g, 'userList'):\n				userList = g.userList\n			else:\n				userList = get_userList()\n				g.userList = userList\n\n			##remove creator and admin from list\n			for name in [claimer, 'Admin']:\n				try:\n					userList.remove(name)\n				except ValueError:\n					print \"user list removal value error\"\n			print userList\n\n			## special condition if claimer is logged in, claimer = \"You\", can be tested for in template jinja\n			## if creator isnt logged in, remove that user from userlist too and create special storage for that\n			user = None\n			if login[0]:\n				if login[1] == claimer: ## login check already occurred\n					claimer = \"You\"\n				elif login[1] != \"Admin\":\n					userList.remove(login[1])\n					if login[1] in eventDenies:\n						user = (\"Denied\", -1)\n						userStati.append(-1)\n					elif login[1] in eventConfirms:\n						user = (\"Confirmed\", 1)\n						userStati.append(1)\n					else:\n						user = (\"Pending\", 0)\n						userStati.append(0)\n\n			## Now edit this list of those that have confirmed\n			\n			confNameList = []\n\n\n			for name in userList:\n				if name in eventDenies:\n					status = -1\n				elif name in eventConfirms:\n					status = 1\n				else:\n					status = 0\n				confNameList.append((name, status))\n				userStati.append(status)\n\n			## the overall status of the event, \n			# if 1 or more denied, status = -1, denied\n			# elif 1 or more pending, status = 0, pending\n			# elif all confirmed, status = 1, confirmed\n			if -1 in userStati:\n				requestStatus = (\"Denied\", -1)\n			elif 0 in userStati:\n				requestStatus = (\"Pending\", 0)\n			else:\n				requestStatus = (\"Confirmed\", 1)\n\n			updateEventStatus(day, monthNum, year, requestStatus[1])\n\n\n			dayData = eventDescription, confNameList, user, requestStatus\n\n\n			## template uses claimer==\"You\" to check if request is selfmade or not but can just use {{ claimer }}\n 		return render_template(\"dayInfo.html\", day=day, month=(monthNum, month), year=year, claimer=claimer, dayData=dayData, login=login)\n	return redirect(url_for(\"index\"))\n\n@app.route('/dayInfoUpdate/<year>/<month>/<day>/<user>/<status>')\ndef dayInfoUpdate(year, month, day, user, status):\n	print \"DayInfoUpdate\", year, month, day, user, status\n	updateUserEventStatus(day, month, year, user, status)\n	return redirect(url_for('dayInfo'))\n\n@app.route('/prevMonth')\ndef prevMonth():\n	prevMonth = session.get('month', datetime.date.today().month-1) -1\n	if prevMonth < 0: ##wrap\n		prevMonth += 12\n		prevYear = session.get('year', datetime.date.today().year) - 1\n		print \">>> previous year: \", prevYear\n		session['year'] = prevYear\n	session['month'] = prevMonth\n	return redirect(url_for('index'))\n@app.route('/nextMonth')\ndef nextMonth():\n	nextMonth = session.get('month', datetime.date.today().month-1) + 1\n	if nextMonth > 11: ##wrap \n		nextMonth -= 12\n		nextYear = session.get('year', datetime.date.today().year) + 1\n		print \">>> nextYear \", nextYear\n		session['year'] = nextYear\n	session['month'] = nextMonth\n	return redirect(url_for('index'))\n\n@app.route('/currMonth')\ndef currMonth():\n	##return to current month\n	currentMonth = datetime.date.today().month - 1\n	currentYear = datetime.date.today().year\n	session['month'] = currentMonth\n	session['year'] = currentYear\n	return redirect(url_for('index'))\n	\n@app.route('/addRequest', methods=[\"POST\", \"GET\"])\ndef addRequest():\n	if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)\n	if request.method == \"POST\" and login[0] and \\\n		\"dmy\" in request.form and 'desc' in request.form:\n\n		day, month, year = request.form.get('dmy').split('#')\n		desc = request.form.get('desc')\n		print \">>> d:{}  m:{}  y:{} \\nDescription: {}\".format(day, month, year, desc)\n		add_MonthEvent(day, month, year, login[1], desc)\n		print \">>> EVENT SHOULD HAVE BEEN ADDED\"\n	\n	return redirect(url_for('dayInfo'))\n\n\n# @app.route('/addUser', methods=['GET', 'POST'])\n# def addUser():\n# 	if not session.get('logged_in') and session.get('Admin'):\n# 		print\"not logged in\"\n# 		return redirect(url_for('index'))\n\n# 	if request.method == \"POST\":\n# 		user = request.form['username']\n# 		user = user[0].upper() + user[1:]\n# 		password = request.form['password']\n# 		userList = get_userList()\n# 		if user in userList:\n# 			print \"User Already Exists\"\n# 			issue = \"User Already Exists\"\n# 		elif user == \"\":\n# 			issue = \"User Cannot Be Empty\"\n# 		elif password == \"\":\n# 			issue = \"Password Cannot Be Empty\"\n# 		else:\n# 			add_User(user, password)\n# 			print get_userList()\n\n# 	return render_template('addUser.html', error=issue)\n\n@app.route('/userPanel', methods=['GET', 'POST'])\ndef userPanel():\n	if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)\n\n	if login[0] == 0:\n		return redirect(url_for('index'))\n\n	## only logged in from this point\n\n	email = get_userSettings(login[1])\n	if email is None:\n		notifSettings = \"\"\n	else:\n		email, notifSettings = email\n\n\n\n	##user can customise notification settings if email is entered,\n	# and change name and password - maybe not name, that may cause issues though\n\n	if request.method == \"GET\":\n		return render_template('userPanel.html', login=login, notifSettings=notifSettings, email=email)\n\n	elif request.method == \"POST\":\n		print \">>> userPanel\", request.form\n		if \"email\" in request.form:\n			email = request.form.get('email')\n			set_userEmail(email, login[1])\n\n		elif \"notificationSettings\" in request.form:\n			notifSettings = \"\".join(request.form.getlist('notif'))\n			set_userNotifSetting(notifSettings, login[1])\n\n		elif \"password\" in request.form:\n			password = request.form.get('password')\n			change_Password(login[1], password)\n\n\n\n		return render_template('userPanel.html', login=login, notifSettings=notifSettings, email=email)\n\n\n\n@app.route('/adminPanel', methods=['GET', 'POST'])\ndef adminPanel():\n	## can only access if logged in as admin\n	if session.get('logged_in') and session.get('username') == \"Admin\":\n		error = None\n		message = None\n		## List of users, with ability to delete or add\n		## And password change ability (maybe)\n		userList = get_userList()\n		\n		##\n		if request.method == \"POST\":\n			print request.form\n			## posted admin function:\n			# add User, delete user, change user password\n			# request form comes as: {'addUser': Random string, ...(function specific entries) }\n			# or:                    {'deleteUser': Random String, ...(function specific entries) }\n			funct = request.form.keys()\n			if 'addUser' in funct:\n				print \"\\nADD USER FORM SUBMIT\\n\"\n				newUser = request.form.get('newUser')\n				if newUser == \"\":\n					error = \"Username cannot be blank\"\n				else:\n					newUser = newUser[0].upper() + newUser[1:]\n					if len(newUser.split(' ')) > 1:\n						error = \"Username cannot have spaces\"\n					elif newUser in userList:\n						error = \"User already Exists\"\n					else:\n						newPass = request.form.get('newPass')\n						if newPass == \"\":\n							error = \"Password cannot be blank\"\n						else:\n							print \"\\nAdding user: \", newUser, \" with password: \", newPass, \"\\n\"\n							message = add_User(newUser, newPass) #also checks for user duplication but that's fine\n							userList = get_userList()\n			elif 'delUser' in funct:\n				delUser = request.form.get('delUser')\n				if delUser not in userList:\n					error = \"user not found in userList, something went wrong\"\n				elif delUser == \"Admin\":\n					error = \"Cannot delete Admin account\"\n				else:\n					message = del_User(delUser)\n					userList = get_userList()\n			elif 'changePass' in funct:\n				changeUser =  request.form.get('changePass')\n				newPass = request.form.get('newPass')\n				if newPass == \"\":\n					error = \"Password cannot be blank\"\n				else:\n					print \"user: \", changeUser, \"new password: \", newPass\n					message = change_Password(changeUser, newPass)\n\n\n\n		userList.remove(\"Admin\") ##final removal of admin, does not need to be sent into template, already hard coded\n		return render_template('adminPanel.html', error=error, message=message, userList=userList, login=(1, session.get('username', \"NAMENOTFOUND\")))\n	else:\n		return redirect(url_for('index'))\n\n\n\n\n\n\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n	print \"Login page\"\n	issue = None\n	logged_in = None\n	if session.get(\"logged_in\"):\n		logged_in = session.get('username', \"USERNAMENOTFOUND\")\n	if request.method == 'POST':\n		print \"LOGIN POST\"\n		userDict = get_userDict()\n		#{user:passhash}\n		user = request.form['username']\n		user = user[0].upper() + user[1:]\n		password = request.form['password']\n		if user in userDict.keys():\n			if check_password_hash(userDict[user], password):\n				print \"logged in\"\n				session['logged_in'] = True\n				session['username'] = user\n				return redirect(url_for('index'))\n			else:\n				issue = \"Password Incorrect\"\n		else:\n			issue = \"Username Not Found\"\n\n	return render_template('loginPage.html', error=issue, logged_in=logged_in)\n\n\n@app.route('/logout')\ndef logout():\n    session.pop('logged_in', None)\n    session['username'] = None\n    return redirect(url_for('index'))\n\n\n\ndef genDays(month, year):\n	## correct with month+1 as datetime uses 1-12 not 0-11\n	print\">>> genDays: m{} - y{}\".format(month, year)\n	firstDay = datetime.date(year, month+1, 1).weekday()\n	days = range(1, MONTHLEN[month]+1)\n	if firstDay != 0:\n		prevMon = range(1, MONTHLEN[month-1]+1)[-firstDay:] #truncated list of end of previous month\n		days = prevMon + days\n	## now add trailing next month\n	days += range(1, 43-len(days))\n	return days\n\n\n\n\ndef notifyAll(typeChar, day, month, year, description, specialUser=None, status=None):\n\n	##special user is used for B and C, for the user whose request has changed\n	## or who created a request\n	## status is used for A and B, as the new status of a request\n	## descript\n\n	##A and B are intrinsically linked, Calling this with A is pointless\n	if typeChar == \"A\":\n		print \">>> notifyAll this function shouldnt reallyt be called with 'A'\"\n\n\n	## Both shouldnt be none, since there is an overlap, Alert if they are\n	if specialUser is None and status is None:\n		print \">>> notifyAll: specialUser and status are None, this should not be the case\"\n\n	SUBJECTS = {\n		'A': \"[Req Cal] Your Request Changed Status\",\n		'B': \"[Req Cal] A Request Changed Status\",\n		'C': \"[Req Cal] A Request Has Been Created\"\n	}\n\n	if not app.config.get('USE_EMAIL'):\n		print \"\\nEMAIL NOT ENABLED\\n\"\n		return\n\n\n\n	validUserList = get_allUserEmails()\n	print \">>> notifyAll, initial list: \", validUserList\n\n	## This block extracts the \"A\" case from a B search, so i can be called with custom email settings\n	# and check if the setting is ticked, because it is different\n	special_A = None\n	if typeChar == \"B\":\n		for item in validUserList:\n			if item[0] == specialUser:\n				validUserList.remove(item)\n				if 'A' in item[1]:\n					special_A = item\n\n\n	#returns [(user, notificationSettings, email), (...), ...]\n\n	## filter for only users with specified notification setting\n	validUserList = [item for item in validUserList if typeChar in item[1]]\n	print \">>> notifyAll, list post filter: \", validUserList\n\n	subject = SUBJECTS[typeChar]\n\n	data = {\n		'day': day,\n		'month': MONTHS[int(month)],\n		'year': year,\n		'description': description,\n		'status': status,\n		'specialUser': specialUser\n	}\n\n	if len(validUserList) > 0:\n\n		msg = Message(subject,\n	                  sender=app.config['MAIL_USERNAME'],\n	                  recipients=[item[2] for item in validUserList],\n	                  body=render_template('email{}.txt'.format(typeChar), data=data)\n	                  )\n		mail.send(msg)\n\n	if special_A is not None:\n		msg = Message(SUBJECTS['A'],\n                  sender=app.config['MAIL_USERNAME'],\n                  recipients=[special_A[2]],\n                  body=render_template('email{}.txt'.format('A'), data=data)\n                  )\n		mail.send(msg)\n\n\n\n\n\n\n## DATABASE SHIT\ndef connect_db():\n    \"\"\"Connects to the specific database.\"\"\"\n    rv = sqlite3.connect(app.config['DATABASE'])\n    rv.row_factory = sqlite3.Row\n    return rv\n\n## init_db, ab, and ac are called externally for database control\ndef init_db():\n    with app.app_context():\n		db = get_db()\n		with app.open_resource('schema.sql', mode='r') as f:\n			db.cursor().executescript(f.read())\n		db.commit()\n\n		for name in ['Admin', 'Jonty', 'Bob', 'Clive']:\n			add_User(name, \"password\")\n\n		print db.execute(\"SELECT username from users\").fetchall()\n\n		add_MonthEvent(22, 8, 2014, \"Jonty\", \"Test Request\\n1337\")\n\n		print \"new Database initialised\"\n\n\n\n\ndef ab():\n	## initialise the userdb with debug users\n	##and add debug event\n	with app.app_context():\n		#add_MonthEvent()\n		for name in ['Admin', 'Jonty', 'Bob', 'Clive']:\n			add_User(name, \"password\")\n\ndef ac():\n	with app.app_context():\n		db = get_db()\n		v\n\n\ndef get_db():\n    \"\"\"Opens a new database connection if there is none yet for the\n    current application context.\n    \"\"\"\n    if not hasattr(g, 'sqlite_db'):\n        g.sqlite_db = connect_db()\n    return g.sqlite_db\n\n\n@app.teardown_appcontext\ndef close_db(error):\n	\"\"\"Closes the database again at the end of the request.\"\"\"\n	print \"  Teardown  \"\n	if hasattr(g, 'sqlite_db'):\n		g.sqlite_db.close()\n	if hasattr(g, 'user_db'):\n		g.user_db.close()\n\n\ndef updateEventStatus(day, month, year, status):\n	##updates the overall status of event\n	## checks first if status will change, if so will change and fire notification\n\n	print \"\\n**UPDATING EVENT STATUS, d{} - m{} - y{} to status: {}\".format(day, month, year, status)\n\n\n	db = get_db()\n\n	##get current status, and also creater user for notifyAll is it is called\n	currData = db.execute(\"SELECT eventStatus, eventClaim, eventDesc from events where dayNum=? and monthNum=? and yearNum=?\", (day, month, year)).fetchone()\n\n	print \">>> updateEventStatus currStatus: \", currData\n\n	if currData[0] == status:\n		print \">>> updateEventStatus: status does not change\"\n		return\n	else:\n\n		notifyAll('B', day, month, year, currData[2], specialUser=currData[1])\n		cursor = db.execute(\"UPDATE events SET eventStatus=? WHERE dayNum=? and monthNum=? and yearNum=?\", (status, day, month, year))\n		db.commit()\n\n\n\ndef updateUserEventStatus(day, month, year, user, status):\n	## like updateEventStatus, but for a single user\n	status = int(status)\n	db = get_db()\n\n	cursor = db.execute('SELECT eventConfirms, eventDenies from events where yearNum=? and monthNum=? and dayNum=?', (year, month, day))\n	cD = cursor.fetchone()\n	print \">>> updateUserEventStatus1 : cD = {}  - {} {} {}\".format(cD, year, month, day)\n	eventConfirms = str(cD[0]).split(',')\n	eventDenies = str(cD[1]).split(',')\n\n	print \">>> updateUserEventStatus2 conf{} den{}\".format(eventConfirms, eventDenies)\n\n	if user in eventConfirms:\n		eventConfirms.remove(user)\n	if user in eventDenies:\n		eventDenies.remove(user)\n\n	print type(status)\n\n	if status == 0:\n		pass\n	elif status == -1:\n		eventDenies.append(user)\n	elif status == 1:\n		eventConfirms.append(user)\n\n	print \">>> updateUserEventStatus3 conf{} den{}\".format(eventConfirms, eventDenies)\n\n	eventConfirms = ','.join(map(str, eventConfirms))\n	eventDenies = ','.join(map(str, eventDenies))\n	print \">>> updateUserEventStatus4 conf{} den{}\".format(eventConfirms, eventDenies)\n\n	db.execute(\"UPDATE events set eventConfirms=?, eventDenies=? where yearNum=? and monthNum=? and dayNum=?\", (eventConfirms, eventDenies, year, month, day))\n	db.commit()\n\n\ndef filterEvents(eventList):\n	##filters daynum from list of tups with [(daynum, status), (...,...), ...]\n	confL, pendL, denL = [], [], []\n	print \">>> filterEvents,\", eventList\n	for item in eventList:\n		if item[1] == 1:\n			confL.append(item[0])\n		elif item[1] == -1:\n			denL.append(item[0])\n		else:\n			pendL.append(item[0])\n	return confL, pendL, denL\n\n\ndef get_monthEvents(month, year):\n	#month is 0-11, same in db\n	print \">>> get_monthEvents\"\n	db = get_db()\n	cursor = db.execute(\"SELECT dayNum, eventStatus FROM events where yearNum=? and monthNum=?\", (year, month))\n	#confL, pendL, denL\n	f = filterEvents(cursor.fetchall())\n	#print {'pend': [x[0]for x  in pendEv], 'conf': [x[0] for x in confEv]}\n	return {'conf': f[0], 'pend': f[1], 'den': f[2]}\n\ndef	get_dayData(day, month, year):\n	#claimer, eventDescription, eventConfirms, eventDenies = dayData\n\n	## debug return\n	#return \"Jonty\", \"This is a sample request description\", \"NiceBarry,NiceClive,Bob\", \"EvilBarry,EvilClive\"\n\n\n	db = get_db()\n	cursor = db.execute('SELECT eventClaim, eventDesc, eventConfirms, eventDenies from events where yearNum=? and monthNum=? and dayNum=?', (year, month, day))\n	cD = cursor.fetchone()\n	print cD\n\n\n	if cD is None:\n		return None\n	else:\n		if len(cD) == 4:\n			print \"extracting ROW\"\n			eventClaim = str(cD[0])\n			eventDesc = str(cD[1])\n			eventConfirms = str(cD[2])\n			eventDenies = str(cD[3])\n			return eventClaim, eventDesc, eventConfirms, eventDenies\n		else:\n			print \"Row wrong length: \", len(cD)\n			return None\n\ndef get_userList():\n	#['username',]\n	print \"get user list\"\n	db = get_db()\n	cursor = db.execute(\"SELECT username from users\")\n	output = cursor.fetchall()\n	print output\n	return [x[0] for x in output]\n\ndef get_userDict():\n	#{user:passhash,}\n	print \"get user dict\"\n	db = get_db()\n	output = db.execute(\"SELECT username, passHash from users\").fetchall()\n	return {k[0]:k[1] for k in output}\n\ndef get_userSettings(user):\n	print \">>> get_userSettings for {}\".format(user)\n	db = get_db()\n	output = db.execute(\"SELECT email, notificationSettings from users where username=?\", (user,)).fetchone()\n	print output\n	if output[0] == None:\n		return None\n	else:\n		return output\n	\ndef set_userEmail(email, user):\n	db = get_db()\n	user = user[0].upper() + user[1:]\n	db.execute(\"UPDATE users set email=? WHERE username=?\", (email, user))\n	db.commit()\n\ndef set_userNotifSetting(notificationSettings, user):\n	db = get_db()\n	db.execute(\"UPDATE users set notificationSettings=? WHERE username=?\", (notificationSettings, user))\n	db.commit()\n\ndef get_allUserEmails():\n	db = get_db()\n	cursor = db.execute(\"SELECT username, notificationSettings, email from users where email is not null\")\n	return cursor.fetchall()\n\ndef add_MonthEvent(day, month, year, claimer, description):\n	notifyAll('C', day, month, year, description, specialUser=claimer)\n	db = get_db()\n	db.execute('INSERT into events (dayNum, monthNum, yearNum, eventStatus, eventClaim, eventDesc, eventConfirms, eventDenies) values (?, ?, ?, ?, ?, ?, ?, ?)',\n				(day, month, year, 0, claimer, description, \"\", \"\"))\n	db.commit()\n\ndef add_User(user, password):\n	userList = get_userList()\n	## usernames always start with a capital letter\n	user = user[0].upper() + user[1:]\n	if user in userList:\n		print \"Username already taken\"\n		return\n	db = get_db()\n	db.execute('INSERT into users (username, passHash, notificationSettings) values (?, ?, ?)',(user, generate_password_hash(password), \"\") )\n	db.commit()\n\ndef del_User(user):\n	## dlete user from db. check if user is present at first, if so remove and check is not in list afterwards, with message responses\n	userList = get_userList()\n	if user not in userList:\n		return \"Not in List\"\n	db = get_db()\n	db.execute('DELETE from users where username=?', (user,))\n	db.commit()\n\n	##Consider further action, removing requests made by this user from events table\n\n	userList = get_userList()\n	if user in userList:\n		return \"User removal not successful\"\n	else:\n		return \"User removal successful\"\n\ndef change_Password(user, newPass):\n	userList = get_userList()\n	if user not in userList:\n		return \"Not in List\"\n	db = get_db()\n	db.execute(\"UPDATE users SET passHash=? where username=?\", (generate_password_hash(newPass), user))\n	db.commit()\n	return \"User \" + user + ' has changed password to \"' + newPass + '\"'\n\n\n\n\n\n\nif __name__ == \"__main__\":\n	app.run()\n",
 			"file": "webapp.py",
-			"file_size": 23729,
-			"file_write_time": 130565964267769320,
 			"settings":
 			{
-				"buffer_size": 22958,
+				"buffer_size": 23168,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/helpPanel.html",
+			"settings":
+			{
+				"buffer_size": 1917,
+				"line_ending": "Unix",
+				"name": "{% extends 'base.html'%}"
 			}
 		},
 		{
 			"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
 			"settings":
 			{
-				"buffer_size": 691,
-				"line_ending": "Windows"
+				"buffer_size": 0,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -230,7 +244,7 @@
 			"file": "templates/dayInfo.html",
 			"settings":
 			{
-				"buffer_size": 2944,
+				"buffer_size": 2973,
 				"line_ending": "Windows"
 			}
 		},
@@ -238,7 +252,7 @@
 			"file": "templates/index.html",
 			"settings":
 			{
-				"buffer_size": 5721,
+				"buffer_size": 5760,
 				"line_ending": "Unix"
 			}
 		},
@@ -246,7 +260,7 @@
 			"file": "templates/base.html",
 			"settings":
 			{
-				"buffer_size": 1481,
+				"buffer_size": 1941,
 				"line_ending": "Unix"
 			}
 		},
@@ -281,12 +295,16 @@
 		"menu_visible": true,
 		"show_minimap": false,
 		"show_open_files": false,
-		"show_tabs": false,
+		"show_tabs": true,
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
 	"file_history":
 	[
+		"/home/jonty/Sublime Text 2/Pristine Packages/Python.sublime-package",
+		"/home/jonty/Sublime Text 2/lib/python26.zip",
+		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-workspace",
+		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-project",
 		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
 		"/C/Users/Jonty/Desktop/if",
 		"/D/Library/Dropbox/py/RequestCalendar/templates/emailA.txt",
@@ -319,6 +337,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)",
 			"notify",
 			"add_Month",
 			"addMonth",
@@ -357,7 +376,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 8,
 			"sheets":
 			[
 				{
@@ -365,15 +384,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 22958,
+						"buffer_size": 23168,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12379,
-								12379
+								8207,
+								8207
 							]
 						],
 						"settings":
@@ -382,25 +401,52 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7686.0,
+						"translation.y": 2608.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
+					"file": "templates/helpPanel.html",
 					"settings":
 					{
-						"buffer_size": 691,
+						"buffer_size": 1917,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								570,
-								444
+								1794,
+								1794
+							]
+						],
+						"settings":
+						{
+							"auto_name": "{% extends 'base.html'%}",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -416,7 +462,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "templates/userPanel.html",
 					"settings":
 					{
@@ -443,7 +489,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -470,7 +516,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -498,19 +544,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
-						"buffer_size": 2944,
+						"buffer_size": 2973,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2543,
-								2492
+								460,
+								460
 							]
 						],
 						"settings":
@@ -519,57 +565,30 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 130.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "templates/index.html",
-					"settings":
-					{
-						"buffer_size": 5721,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1955,
-								1955
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 162.0,
+						"translation.y": 40.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 7,
-					"file": "templates/base.html",
+					"file": "templates/index.html",
 					"settings":
 					{
-						"buffer_size": 1481,
+						"buffer_size": 5760,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1145,
-								1145
+								63,
+								63
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -580,6 +599,33 @@
 				},
 				{
 					"buffer": 8,
+					"file": "templates/base.html",
+					"settings":
+					{
+						"buffer_size": 1941,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1941,
+								1941
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "static/css/styles.css",
 					"settings":
 					{
@@ -590,8 +636,8 @@
 						"selection":
 						[
 							[
-								2752,
-								2752
+								2154,
+								2154
 							]
 						],
 						"settings":
@@ -600,7 +646,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3413.0,
+						"translation.y": 1665.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -658,11 +704,11 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,

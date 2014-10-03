@@ -4,6 +4,7 @@ from werkzeug import check_password_hash, generate_password_hash
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 MONTHLEN = [31,28,31,30,31,30,31,31,30,31,30,31]
+WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 ## months go 0-11, and index directly the other data
 
 
@@ -52,10 +53,8 @@ def index():
 	else:
 		todayDate = None
 
-	if session.get('logged_in', 0):
-		login = (1, session.get('username', "NAMENOTFOUND"))
-	else:
-		login = (0, None)
+
+	login = getLogin()
 
 	## events is then a dict, containing list of dates with pending and list of those with confirm
 	return render_template("index.html", year=year, month=monthName, days=days, today=todayDate, events=get_monthEvents(month, year), login=login)
@@ -82,7 +81,9 @@ def dayInfo():
 		year = session.get('year', datetime.date.today().year)
 		
 		day, month = showInfo
+		day = int(day)
 		monthNum = MONTHS.index(month)
+		weekday = WEEKDAYS[datetime.date(year, monthNum, day).weekday()]
 
 		if session.get('logged_in', 0):
 			login = (1, session.get('username', "NAMENOTFOUND"))
@@ -178,7 +179,7 @@ def dayInfo():
 
 
 			## template uses claimer=="You" to check if request is selfmade or not but can just use {{ claimer }}
- 		return render_template("dayInfo.html", day=day, month=(monthNum, month), year=year, claimer=claimer, dayData=dayData, login=login)
+ 		return render_template("dayInfo.html", day=day, month=(monthNum, month), year=year, weekday=weekday, claimer=claimer, dayData=dayData, login=login)
 	return redirect(url_for("index"))
 
 @app.route('/dayInfoUpdate/<year>/<month>/<day>/<user>/<status>')
@@ -219,10 +220,9 @@ def currMonth():
 	
 @app.route('/addRequest', methods=["POST", "GET"])
 def addRequest():
-	if session.get('logged_in', 0):
-		login = (1, session.get('username', "NAMENOTFOUND"))
-	else:
-		login = (0, None)
+
+	login = getLogin()
+
 	if request.method == "POST" and login[0] and \
 		"dmy" in request.form and 'desc' in request.form:
 
@@ -261,10 +261,8 @@ def addRequest():
 
 @app.route('/userPanel', methods=['GET', 'POST'])
 def userPanel():
-	if session.get('logged_in', 0):
-		login = (1, session.get('username', "NAMENOTFOUND"))
-	else:
-		login = (0, None)
+
+	login = getLogin()
 
 	if login[0] == 0:
 		return redirect(url_for('index'))
@@ -303,6 +301,12 @@ def userPanel():
 
 		return render_template('userPanel.html', login=login, notifSettings=notifSettings, email=email)
 
+@app.route('/helpPanel')
+def helpPanel():
+	
+	login = getLogin()
+
+	return render_template('helpPanel.html', login=login, adminEmail=app.config.get("ADMIN_EMAIL", None))
 
 
 @app.route('/adminPanel', methods=['GET', 'POST'])
@@ -405,6 +409,14 @@ def logout():
     session.pop('logged_in', None)
     session['username'] = None
     return redirect(url_for('index'))
+
+def getLogin():
+	if session.get('logged_in', 0):
+		return (1, session.get('username', "NAMENOTFOUND"))
+	else:
+		return (0, None)
+
+
 
 
 
@@ -583,7 +595,7 @@ def updateEventStatus(day, month, year, status):
 		return
 	else:
 
-		notifyAll('B', day, month, year, currData[2] specialUser=currData[1])
+		notifyAll('B', day, month, year, currData[2], specialUser=currData[1])
 		cursor = db.execute("UPDATE events SET eventStatus=? WHERE dayNum=? and monthNum=? and yearNum=?", (status, day, month, year))
 		db.commit()
 
