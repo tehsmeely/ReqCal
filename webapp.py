@@ -1,5 +1,5 @@
 import time,os.path, sqlite3, datetime, calendar
-from flask import Flask, render_template, request, redirect, url_for, session, g
+from flask import Flask, render_template, request, redirect, url_for, session, g, jsonify
 from werkzeug import check_password_hash, generate_password_hash
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -419,6 +419,48 @@ def getLogin():
 
 
 
+#
+#            mMm               mMm        m
+#            mMmMm           mMmMm        m
+#            mMm mMm       mMm mMm        m
+#            mMm   mMm   mMm   mMm        m
+#            mMm     mMmMm     mMm    M   m   M
+#            mMm      mMm      mMm     M  m  M
+#            mMm               mMm      M m M
+#            mMm               mMm        M  
+
+
+
+
+## MOBILE INTERFACE FUNCTIONS
+@app.route('/m/dayInfo', methods=["POST"])
+def DayInfo_M():
+	print ">>> DayInfo_M", request.form
+	day = int(request.form.get('day'))
+	month = int(request.form.get('month'))
+	year = int(request.form.get('year'))
+
+	dayData = get_dayData(day, month, year)
+	#(eventClaimer, eventDescription, eventConfirms, eventDenies)
+	if dayData is None:
+		return jsonify(day=None)
+	else:
+		## split confirms and denies to lists, filter out any "" strings from stray commas 
+		print dayData[2]
+		confirms = filter(lambda a: a!="", dayData[2].split(","))
+		print confirms
+		denies = filter(lambda a: a!="", dayData[3].split(","))
+		## return all the information the app needs to form the page
+		return jsonify({
+			"claimer": dayData[0],
+			"description": dayData[1],
+			"confirms": confirms,
+			"denies": denies
+			})
+
+
+
+
 
 def genDays(month, year):
 	## correct with month+1 as datetime uses 1-12 not 0-11
@@ -511,6 +553,20 @@ def notifyAll(typeChar, day, month, year, description, specialUser=None, status=
                   )
 		mail.send(msg)
 
+
+
+#
+#            dDDDDDDb               db
+#            dDb    dDDb            db
+#            dDb       dDb          db
+#            dDb         dDb        db
+#            dDb         dDb        db
+#            dDb         dDb        db
+#            dDb         dDb        db
+#            dDb         dDb    dD  db  dD
+#            dDb       dDb       dD db dD
+#            dDb    dDDb          dDdbdD
+#            dDDDDDDb              dDDb
 
 
 
@@ -781,4 +837,4 @@ def change_Password(user, newPass):
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(host='0.0.0.0')
