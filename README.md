@@ -16,9 +16,9 @@ this is hoped to help thje whole system
 ###General Structure
 The app acts like a calendar. Members can log in, and once there can make requests to use the resource on that day
 Other users can then confirm or deny that request, and this effects the overall status of the request
->>> All users confirm: request is confirmed
->>> One or more users still pending: request is pending
->>> One or more users deny: Request is denied
+> All users confirm: request is confirmed
+> One or more users still pending: request is pending
+> One or more users deny: Request is denied
 
 * Index calendar: displays any requests and their stati using colours (red, orange, green)
 * Day info page: displays day, request if extant, or allows users to create one
