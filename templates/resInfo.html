@@ -12,11 +12,15 @@
 <div style="text-align: center;">
 	<br><br>
 	{% if image != None %}
-	<div id="resImg" style="width:400px; height:247px"><img src="{{url_for('static', filename='resource/' + image)}}"></div>
+		<img src="{{url_for('static', filename='resource/' + image)}}" style="max-width:80%">
 	{% endif %}
 	<br>
 
-	<p>DIS IS A BOAT</p>
+	{% if desc != None %}
+		<p>{{desc|nl2br}}</p>
+	{% else %}
+		<p>There has been no description set</p>
+	{% endif %}
 </div>
 
 {% endblock %}

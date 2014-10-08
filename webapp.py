@@ -1,13 +1,14 @@
-import time,os.path, sqlite3, datetime, calendar
+import time,os.path, sqlite3, datetime, calendar, re
 from flask import Flask, render_template, request, redirect, url_for, session, g, jsonify
 from werkzeug import check_password_hash, generate_password_hash
+from jinja2 import evalcontextfilter, Markup, escape
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 MONTHLEN = [31,28,31,30,31,30,31,31,30,31,30,31]
 WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 ## months go 0-11, and index directly the other data
 
-
+_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 
 
 app = Flask(__name__)
@@ -212,8 +213,23 @@ def resInfo():
 	##resource info, serves page with customised info on the shared resource
 	image = "boat.png"
 	print url_for('static', filename='resource/description.txt')
-	description = 1
-	return render_template('resInfo.html', login=getLogin(), image=image)
+	try:
+		f = app.open_resource("./" + url_for('static', filename='resource/description.txt'))
+		desc = f.read()
+		print ">>> resInfo, file opened"
+	except IOError:
+		desc = None
+		print ">>> resInfo, file NOT opened"
+	return render_template('resInfo.html', login=getLogin(), image=image, desc=desc)
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+        for p in _paragraph_re.split(escape(value)))
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 @app.route('/prevMonth')
 def prevMonth():

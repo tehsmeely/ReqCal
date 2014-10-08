@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block backButton %}{% endblock %}
+
 
 {% block head %}
 	<script>
@@ -68,6 +68,14 @@
 		});
 	</script>
 {% endblock %}
+
+{% block backButton %}
+<!-- replaces backbutton with the resource info link -->
+	<div style="text-align: left; position: fixed; float: left; top: 3px; left: 3px; font-size: 75%; vertical-align: middle;">
+	<a href="{{ url_for('resInfo') }}"><img class="logIcon" src="{{ url_for('static', filename='menu.png') }}"> What we're sharing</a>
+	</div>
+{% endblock %}
+
 {% block body %}
 		<div style="text-align:center">{{year}}</div>
 		<form id="subform" method="post" action="{{ url_for('dayInfo') }}">
