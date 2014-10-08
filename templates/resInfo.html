@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script>
+	$(function(){
+		$('#resImg').corner();
+	})
+</script>
+{% endblock %}
+
+{% block body %}
+<div style="text-align: center;">
+	<br><br>
+	{% if image != None %}
+	<div id="resImg" style="width:400px; height:247px"><img src="{{url_for('static', filename='resource/' + image)}}"></div>
+	{% endif %}
+	<br>
+
+	<p>DIS IS A BOAT</p>
+</div>
+
+{% endblock %}

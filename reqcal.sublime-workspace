@@ -4,16 +4,8 @@
 		"selected_items":
 		[
 			[
-				"event",
-				"eventDenies"
-			],
-			[
 				"get",
 				"getLogin"
-			],
-			[
-				"week",
-				"WEEKDAYS"
 			],
 			[
 				"eventC",
@@ -108,6 +100,10 @@
 				"eventDenies"
 			],
 			[
+				"event",
+				"eventConfirms"
+			],
+			[
 				"add_",
 				"add_MonthEvent"
 			],
@@ -195,25 +191,33 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 24837,
+				"buffer_size": 25548,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "templates/helpPanel.html",
+			"file": "templates/resInfo.html",
 			"settings":
 			{
-				"buffer_size": 1917,
-				"line_ending": "Unix",
-				"name": "{% extends 'base.html'%}"
+				"buffer_size": 394,
+				"line_ending": "Windows",
+				"name": "{% extends 'base.html' %}"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 1966,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
+				"buffer_size": 691,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -257,10 +261,13 @@
 			}
 		},
 		{
+			"contents": "<head>\n	<meta charset=\"UTF-8\">\n	{% block title %}<title>Calendar</title>{% endblock %}\n	<link rel=\"icon\" type=\"image/png\" href=\"{{ url_for('static', filename='icon.png') }}\">\n	\n	<link rel=\"stylesheet\" href=\"http://fonts.googleapis.com/css?family=Lato:300,400,700\">\n	<link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/styles.css') }}\">\n	\n	<script src=\"{{ url_for('static', filename='jquery-2.1.1.min.js') }}\"></script>\n	<script src=\"{{ url_for('static', filename='js/functions.js') }}\"></script>\n	<script src=\"{{ url_for('static', filename='js/jquery.corner.js') }}\"></script>\n\n	{% block head %}\n	{% endblock %}\n	\n</head>\n\n<body>\n	{% block backButton %} <!-- overwrite in child to remove -->\n	<!--<div style=\"float: left;\">-->\n	<div style=\"text-align: left; position: fixed; float: left; top: 3px; left: 3px;\">\n	<a href=\"{{ url_for('index') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='backward.png') }}\"></a>\n	</div>\n	{% endblock %}\n	{% block loginButton %} <!-- overwrite in child to remove -->\n	<div style=\"text-align: right; position: fixed; float: right; top: 3px; right: 3px;\">\n	{% if login[0] -%} You are logged in as {{ login[1] }}  <a href=\"{{ url_for('logout') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='exit.png') }}\"></a>\n		{% if login[1] == \"Admin\" %}\n		<div style=\"text-align: right;\">Go to <a href=\"{{ url_for('adminPanel') }}\">admin panel</a></div>\n		{% else %}\n		<div style=\"text-align: right;\">Go to <a href=\"{{ url_for('userPanel') }}\">user panel</a></div>\n		{% endif %}\n	{%- else -%}\n	You are not currently logged in: <a href=\"{{ url_for('login') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='entrance.png') }}\"> Log In</a>{%- endif %}\n	</div>\n	{% endblock %}\n	<br>\n	<div class=\"container\">\n		{% block body %}\n		{% endblock %}\n	</div>\n	{% block helpButton %}\n	<div style=\"text-align: left; float: left; position: fixed; left: 3px; bottom: 3px; font-size: 75%;\">\n		<a href=\"{{ url_for('helpPanel') }}\">help</a>\n	</div>\n	{% endblock %}\n</body>",
 			"file": "templates/base.html",
+			"file_size": 1941,
+			"file_write_time": 130567630850000000,
 			"settings":
 			{
-				"buffer_size": 1941,
+				"buffer_size": 2022,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,23 +278,26 @@
 				"buffer_size": 2752,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"file": "TODO",
-			"settings":
-			{
-				"buffer_size": 113,
-				"line_ending": "Unix",
-				"name": "To do"
-			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 58.0,
+		"height": 265.0,
 		"selected_items":
 		[
+			[
+				"fig",
+				"Figlet: Add Text"
+			],
+			[
+				"figl",
+				"Figlet: Add Text"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
@@ -304,16 +314,15 @@
 		"menu_visible": true,
 		"show_minimap": false,
 		"show_open_files": false,
-		"show_tabs": true,
+		"show_tabs": false,
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
 	"file_history":
 	[
-		"/home/jonty/Sublime Text 2/Pristine Packages/Python.sublime-package",
-		"/home/jonty/Sublime Text 2/lib/python26.zip",
-		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-workspace",
-		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-project",
+		"/D/Library/Documents/Job Applications/coverLetter-SpaceApe.txt",
+		"/D/Library/Documents/Job Applications/coverLetter.txt",
+		"/D/Library/Documents/Job Applications/coverLetter-KOTA.txt",
 		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
 		"/C/Users/Jonty/Desktop/if",
 		"/D/Library/Dropbox/py/RequestCalendar/templates/emailA.txt",
@@ -346,7 +355,6 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)",
 			"notify",
 			"add_Month",
 			"addMonth",
@@ -385,7 +393,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -393,15 +401,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 24837,
+						"buffer_size": 25548,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12968,
-								12968
+								6702,
+								6702
 							]
 						],
 						"settings":
@@ -410,32 +418,31 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6260.0,
+						"translation.y": 3186.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "templates/helpPanel.html",
+					"file": "templates/resInfo.html",
 					"settings":
 					{
-						"buffer_size": 1917,
+						"buffer_size": 394,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1794,
-								1794
+								394,
+								394
 							]
 						],
 						"settings":
 						{
-							"auto_name": "{% extends 'base.html'%}",
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "{% extends 'base.html' %}",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -445,18 +452,44 @@
 				},
 				{
 					"buffer": 2,
-					"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
+					"file": "README.md",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 1966,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1966,
+								1966
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
+					"settings":
+					{
+						"buffer_size": 691,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								570,
+								444
 							]
 						],
 						"settings":
@@ -472,7 +505,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "templates/userPanel.html",
 					"settings":
 					{
@@ -483,8 +516,8 @@
 						"selection":
 						[
 							[
-								618,
-								618
+								684,
+								684
 							]
 						],
 						"settings":
@@ -493,13 +526,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 108.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -526,7 +559,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -554,7 +587,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
@@ -565,8 +598,8 @@
 						"selection":
 						[
 							[
-								1256,
-								1256
+								0,
+								0
 							]
 						],
 						"settings":
@@ -575,13 +608,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 130.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "templates/index.html",
 					"settings":
 					{
@@ -592,8 +625,8 @@
 						"selection":
 						[
 							[
-								63,
-								63
+								0,
+								0
 							]
 						],
 						"settings":
@@ -602,40 +635,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "templates/base.html",
-					"settings":
-					{
-						"buffer_size": 1941,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								943,
-								943
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 162.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
+					"file": "templates/base.html",
+					"settings":
+					{
+						"buffer_size": 2022,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								625,
+								625
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
 					"file": "static/css/styles.css",
 					"settings":
 					{
@@ -646,8 +679,8 @@
 						"selection":
 						[
 							[
-								2154,
-								2154
+								2653,
+								2653
 							]
 						],
 						"settings":
@@ -656,34 +689,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1665.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "TODO",
-					"settings":
-					{
-						"buffer_size": 113,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								113,
-								113
-							]
-						],
-						"settings":
-						{
-							"auto_name": "To do",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 3413.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -741,11 +747,11 @@
 	},
 	"select_project":
 	{
-		"height": 500.0,
+		"height": 0.0,
 		"selected_items":
 		[
 		],
-		"width": 380.0
+		"width": 0.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,

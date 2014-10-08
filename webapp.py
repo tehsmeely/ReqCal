@@ -32,6 +32,14 @@ if app.config['USE_EMAIL']:
 ##  as well as buffers from other months to make up 42, can can be made using
 ##  month length and start day
 
+#### ##    ## ########  ######## ##     ##
+ ##  ###   ## ##     ## ##        ##   ##
+ ##  ####  ## ##     ## ##         ## ##
+ ##  ## ## ## ##     ## ######      ###
+ ##  ##  #### ##     ## ##         ## ##
+ ##  ##   ### ##     ## ##        ##   ##
+#### ##    ## ########  ######## ##     ##
+
 @app.route('/', methods=['POST', 'GET'])
 def index():
 	today = datetime.date.today()
@@ -59,6 +67,17 @@ def index():
 	## events is then a dict, containing list of dates with pending and list of those with confirm
 	return render_template("index.html", year=year, month=monthName, days=days, today=todayDate, events=get_monthEvents(month, year), login=login)
 	#{'pend':[20, 22, 23, 30], 'conf':[1, 12, 17, 19, 21]}
+
+
+
+########     ###    ##    ##    #### ##    ## ########  #######
+##     ##   ## ##    ##  ##      ##  ###   ## ##       ##     ##
+##     ##  ##   ##    ####       ##  ####  ## ##       ##     ##
+##     ## ##     ##    ##        ##  ## ## ## ######   ##     ##
+##     ## #########    ##        ##  ##  #### ##       ##     ##
+##     ## ##     ##    ##        ##  ##   ### ##       ##     ##
+########  ##     ##    ##       #### ##    ## ##        #######
+
 
 @app.route('/dayInfo', methods=['POST', 'GET'])
 def dayInfo():
@@ -188,6 +207,14 @@ def dayInfoUpdate(year, month, day, user, status):
 	updateUserEventStatus(day, month, year, user, status)
 	return redirect(url_for('dayInfo'))
 
+@app.route('/resInfo')
+def resInfo():
+	##resource info, serves page with customised info on the shared resource
+	image = "boat.png"
+	print url_for('static', filename='resource/description.txt')
+	description = 1
+	return render_template('resInfo.html', login=getLogin(), image=image)
+
 @app.route('/prevMonth')
 def prevMonth():
 	prevMonth = session.get('month', datetime.date.today().month-1) -1
@@ -235,29 +262,13 @@ def addRequest():
 	return redirect(url_for('dayInfo'))
 
 
-# @app.route('/addUser', methods=['GET', 'POST'])
-# def addUser():
-# 	if not session.get('logged_in') and session.get('Admin'):
-# 		print"not logged in"
-# 		return redirect(url_for('index'))
-
-# 	if request.method == "POST":
-# 		user = request.form['username']
-# 		user = user[0].upper() + user[1:]
-# 		password = request.form['password']
-# 		userList = get_userList()
-# 		if user in userList:
-# 			print "User Already Exists"
-# 			issue = "User Already Exists"
-# 		elif user == "":
-# 			issue = "User Cannot Be Empty"
-# 		elif password == "":
-# 			issue = "Password Cannot Be Empty"
-# 		else:
-# 			add_User(user, password)
-# 			print get_userList()
-
-# 	return render_template('addUser.html', error=issue)
+########     ###    ##    ## ######## ##        ######
+##     ##   ## ##   ###   ## ##       ##       ##    ##
+##     ##  ##   ##  ####  ## ##       ##       ##
+########  ##     ## ## ## ## ######   ##        ######
+##        ######### ##  #### ##       ##             ##
+##        ##     ## ##   ### ##       ##       ##    ##
+##        ##     ## ##    ## ######## ########  ######
 
 @app.route('/userPanel', methods=['GET', 'POST'])
 def userPanel():
