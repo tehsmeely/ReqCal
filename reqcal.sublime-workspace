@@ -191,7 +191,7 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 25548,
+				"buffer_size": 26135,
 				"line_ending": "Windows"
 			}
 		},
@@ -199,7 +199,7 @@
 			"file": "templates/resInfo.html",
 			"settings":
 			{
-				"buffer_size": 394,
+				"buffer_size": 453,
 				"line_ending": "Windows",
 				"name": "{% extends 'base.html' %}"
 			}
@@ -256,19 +256,24 @@
 			"file": "templates/index.html",
 			"settings":
 			{
-				"buffer_size": 5760,
+				"buffer_size": 6085,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<head>\n	<meta charset=\"UTF-8\">\n	{% block title %}<title>Calendar</title>{% endblock %}\n	<link rel=\"icon\" type=\"image/png\" href=\"{{ url_for('static', filename='icon.png') }}\">\n	\n	<link rel=\"stylesheet\" href=\"http://fonts.googleapis.com/css?family=Lato:300,400,700\">\n	<link rel=\"stylesheet\" href=\"{{ url_for('static', filename='css/styles.css') }}\">\n	\n	<script src=\"{{ url_for('static', filename='jquery-2.1.1.min.js') }}\"></script>\n	<script src=\"{{ url_for('static', filename='js/functions.js') }}\"></script>\n	<script src=\"{{ url_for('static', filename='js/jquery.corner.js') }}\"></script>\n\n	{% block head %}\n	{% endblock %}\n	\n</head>\n\n<body>\n	{% block backButton %} <!-- overwrite in child to remove -->\n	<!--<div style=\"float: left;\">-->\n	<div style=\"text-align: left; position: fixed; float: left; top: 3px; left: 3px;\">\n	<a href=\"{{ url_for('index') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='backward.png') }}\"></a>\n	</div>\n	{% endblock %}\n	{% block loginButton %} <!-- overwrite in child to remove -->\n	<div style=\"text-align: right; position: fixed; float: right; top: 3px; right: 3px;\">\n	{% if login[0] -%} You are logged in as {{ login[1] }}  <a href=\"{{ url_for('logout') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='exit.png') }}\"></a>\n		{% if login[1] == \"Admin\" %}\n		<div style=\"text-align: right;\">Go to <a href=\"{{ url_for('adminPanel') }}\">admin panel</a></div>\n		{% else %}\n		<div style=\"text-align: right;\">Go to <a href=\"{{ url_for('userPanel') }}\">user panel</a></div>\n		{% endif %}\n	{%- else -%}\n	You are not currently logged in: <a href=\"{{ url_for('login') }}\"><img class=\"logIcon\" src=\"{{ url_for('static', filename='entrance.png') }}\"> Log In</a>{%- endif %}\n	</div>\n	{% endblock %}\n	<br>\n	<div class=\"container\">\n		{% block body %}\n		{% endblock %}\n	</div>\n	{% block helpButton %}\n	<div style=\"text-align: left; float: left; position: fixed; left: 3px; bottom: 3px; font-size: 75%;\">\n		<a href=\"{{ url_for('helpPanel') }}\">help</a>\n	</div>\n	{% endblock %}\n</body>",
 			"file": "templates/base.html",
-			"file_size": 1941,
-			"file_write_time": 130567630850000000,
 			"settings":
 			{
-				"buffer_size": 2022,
+				"buffer_size": 2023,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "static/undo2.svg",
+			"settings":
+			{
+				"buffer_size": 3063,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -393,7 +398,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -401,15 +406,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 25548,
+						"buffer_size": 26135,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6702,
-								6702
+								636,
+								636
 							]
 						],
 						"settings":
@@ -418,7 +423,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3186.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -428,15 +433,15 @@
 					"file": "templates/resInfo.html",
 					"settings":
 					{
-						"buffer_size": 394,
+						"buffer_size": 453,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								394,
-								394
+								356,
+								356
 							]
 						],
 						"settings":
@@ -618,15 +623,15 @@
 					"file": "templates/index.html",
 					"settings":
 					{
-						"buffer_size": 5760,
+						"buffer_size": 6085,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2225,
+								2225
 							]
 						],
 						"settings":
@@ -635,7 +640,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 162.0,
+						"translation.y": 702.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -645,20 +650,20 @@
 					"file": "templates/base.html",
 					"settings":
 					{
-						"buffer_size": 2022,
+						"buffer_size": 2023,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								625,
-								625
+								937,
+								937
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -669,6 +674,32 @@
 				},
 				{
 					"buffer": 10,
+					"file": "static/undo2.svg",
+					"settings":
+					{
+						"buffer_size": 3063,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3063,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
 					"file": "static/css/styles.css",
 					"settings":
 					{

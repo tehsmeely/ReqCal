@@ -1,7 +1,9 @@
+from RequestCalendar import app
 import time,os.path, sqlite3, datetime, calendar, re
 from flask import Flask, render_template, request, redirect, url_for, session, g, jsonify
 from werkzeug import check_password_hash, generate_password_hash
 from jinja2 import evalcontextfilter, Markup, escape
+
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 MONTHLEN = [31,28,31,30,31,30,31,31,30,31,30,31]
@@ -9,25 +11,6 @@ WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 
 ## months go 0-11, and index directly the other data
 
 _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
-
-
-app = Flask(__name__)
-app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'events.db'),
-    DEBUG=True,
-    SECRET_KEY='workingkey',
-    USE_EMAIL=True,
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = 465,
-    MAIL_USE_TLS = False,
-    MAIL_USE_SSL = True,
-    MAIL_USERNAME = 'request.calendar.noreply@gmail.com',
-    MAIL_PASSWORD = 'Request30Calendar'
-))
-
-if app.config['USE_EMAIL']:
-	from flask.ext.mail import Mail, Message
-	mail = Mail(app)
 
 ## days[] is an array of fixed length 42, including all the days of the current month,
 ##  as well as buffers from other months to make up 42, can can be made using
