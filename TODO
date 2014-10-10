@@ -5,3 +5,5 @@ To do:
 2) Block creation of events before "today": DONE
 
 3) Users view their own requests - probably via user panel
+
+4) As part of {1}, split app config into default and user configurable files: ACTIONING

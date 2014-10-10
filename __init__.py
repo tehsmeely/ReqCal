@@ -1,22 +1,19 @@
 import os
 from flask import Flask
 
+## Config is set up from a default file that loads every time
 
+##User Admin can edit custom settings file which overwrites is necessary
+
+print "INITALISING APP"
 app = Flask(__name__)
-app.config.update(dict(
-    DATABASE=os.path.join(app.root_path, 'events.db'),
-    DEBUG=True,
-    SECRET_KEY='workingkey',
-    USE_EMAIL=True,
-    MAIL_SERVER = 'smtp.gmail.com',
-    MAIL_PORT = 465,
-    MAIL_USE_TLS = False,
-    MAIL_USE_SSL = True,
-    MAIL_USERNAME = 'request.calendar.noreply@gmail.com',
-    MAIL_PASSWORD = 'Request30Calendar'
-))
 
-## Admin setup
+##Default config
+app.config.from_object('RequestCalendar.defaultSettings')
+
+
+##User config
+app.config.from_object
 
 ## Email setup
 if app.config['USE_EMAIL']:
