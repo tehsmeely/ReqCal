@@ -20,7 +20,7 @@ app.config.update(dict(
 
 ## Email setup
 if app.config['USE_EMAIL']:
-	from flask.ext.mail import Mail, Message
+	from flask.ext.mail import Mail
 	mail = Mail(app)
 
 ## Shared resource setup

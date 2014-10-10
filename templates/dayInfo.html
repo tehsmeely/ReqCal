@@ -64,16 +64,21 @@
 			{% endfor %}
 			</ul>
 
+
 			{% if dayData[2] != None -%}
 				<p>You are currently: {{dayData[2][0]}} <img class="levelIcon" src="{% if dayData[2][1] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif dayData[2][1] == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></p>
+				{% if not past %}
 				<a href="{{ url_for('dayInfoUpdate', year=year, month=month[0], day=day, user=login[1], status=1) }}"><button>Confirm</button></a><a href="{{ url_for('dayInfoUpdate', year=year, month=month[0], day=day, user=login[1], status=-1) }}"><button>Deny</button></a>
+				{% else %}
+				<p>Cannot change status, as day has already happened</p>
+				{% endif %}
 			{%- endif %}
 				
 		{% else %}
 		<!-- No Day Data, display such and offer to make request -->
 			<p>No requests exist for today</p>
 			
-			{% if login[0] -%}
+			{% if login[0] and not past -%}
 
 
 			<p>You can make a request for today</p>
@@ -89,6 +94,11 @@
 			</div>
 
 
+			{%- elif past -%}
+
+			You cannot make a request as today is in the past
+
+
 			{%- else -%}
 
 
@@ -101,6 +111,5 @@
 		{% endif %}
 
 
-		<p>Day Data is: {{dayData|safe}}</p>
 	</div>
 {% endblock %}

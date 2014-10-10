@@ -4,6 +4,10 @@ from flask import Flask, render_template, request, redirect, url_for, session, g
 from werkzeug import check_password_hash, generate_password_hash
 from jinja2 import evalcontextfilter, Markup, escape
 
+if app.config['USE_EMAIL']:
+	from flask.ext.mail import Mail, Message
+	from RequestCalendar import mail
+
 
 MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 MONTHLEN = [31,28,31,30,31,30,31,31,30,31,30,31]
@@ -88,7 +92,9 @@ def dayInfo():
 		monthNum = MONTHS.index(month)
 		print ">>> DayInfo, y{}, m{}, d{}".format(year, monthNum, day)
 		##monthnum+1 used as months are handled 0-11 here but 1-12 in datetime
-		weekday = WEEKDAYS[datetime.date(year, monthNum+1, day).weekday()]
+		date = datetime.date(year, monthNum+1, day)
+		weekday = WEEKDAYS[date.weekday()]
+		past = date < datetime.date.today()
 
 		if session.get('logged_in', 0):
 			login = (1, session.get('username', "NAMENOTFOUND"))
@@ -184,13 +190,18 @@ def dayInfo():
 
 
 			## template uses claimer=="You" to check if request is selfmade or not but can just use {{ claimer }}
- 		return render_template("dayInfo.html", day=day, month=(monthNum, month), year=year, weekday=weekday, claimer=claimer, dayData=dayData, login=login)
+ 		return render_template("dayInfo.html", day=day, month=(monthNum, month), year=year, weekday=weekday, claimer=claimer, dayData=dayData, login=login, past=past)
 	return redirect(url_for("index"))
 
 @app.route('/dayInfoUpdate/<year>/<month>/<day>/<user>/<status>')
 def dayInfoUpdate(year, month, day, user, status):
 	print "DayInfoUpdate", year, month, day, user, status
-	updateUserEventStatus(day, month, year, user, status)
+	##check event isnt in the past:
+	past = datetime.date(int(year), int(month), int(day)) < datetime.date.today()
+	if past:
+		print ">>> dayInfoUpdate: update request made for past date, ignoring"
+	else:
+		updateUserEventStatus(day, month, year, user, status)
 	return redirect(url_for('dayInfo'))
 
 @app.route('/resInfo')
@@ -488,7 +499,13 @@ def genDays(month, year):
 	return days
 
 
-
+######## ##     ##    ###    #### ##
+##       ###   ###   ## ##    ##  ##
+##       #### ####  ##   ##   ##  ##
+######   ## ### ## ##     ##  ##  ##
+##       ##     ## #########  ##  ##
+##       ##     ## ##     ##  ##  ##
+######## ##     ## ##     ## #### ########
 
 def notifyAll(typeChar, day, month, year, description, specialUser=None, status=None):
 
@@ -499,12 +516,15 @@ def notifyAll(typeChar, day, month, year, description, specialUser=None, status=
 
 	##A and B are intrinsically linked, Calling this with A is pointless
 	if typeChar == "A":
-		print ">>> notifyAll this function shouldnt reallyt be called with 'A'"
+		print ">>> notifyAll this function shouldnt really be called with 'A'"
 
 
 	## Both shouldnt be none, since there is an overlap, Alert if they are
 	if specialUser is None and status is None:
 		print ">>> notifyAll: specialUser and status are None, this should not be the case"
+	if status is not None:
+		print ">>> notifyAll Status assignment, status=", status
+		status = ['Denied', 'Pending', 'Confirmed'][status+1]
 
 	SUBJECTS = {
 		'A': "[Req Cal] Your Request Changed Status",
@@ -664,7 +684,7 @@ def updateEventStatus(day, month, year, status):
 		return
 	else:
 
-		notifyAll('B', day, month, year, currData[2], specialUser=currData[1])
+		notifyAll('B', day, month, year, currData[2], status=currData[0], specialUser=currData[1])
 		cursor = db.execute("UPDATE events SET eventStatus=? WHERE dayNum=? and monthNum=? and yearNum=?", (status, day, month, year))
 		db.commit()
 
