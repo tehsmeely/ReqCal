@@ -4,8 +4,16 @@
 		"selected_items":
 		[
 			[
+				"event",
+				"eventDenies"
+			],
+			[
 				"get",
 				"getLogin"
+			],
+			[
+				"week",
+				"WEEKDAYS"
 			],
 			[
 				"eventC",
@@ -100,10 +108,6 @@
 				"eventDenies"
 			],
 			[
-				"event",
-				"eventConfirms"
-			],
-			[
 				"add_",
 				"add_MonthEvent"
 			],
@@ -188,52 +192,19 @@
 	"buffers":
 	[
 		{
+			"file": "__init__.py",
+			"settings":
+			{
+				"buffer_size": 590,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 26135,
+				"buffer_size": 25702,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/resInfo.html",
-			"settings":
-			{
-				"buffer_size": 453,
-				"line_ending": "Windows",
-				"name": "{% extends 'base.html' %}"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 1966,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
-			"settings":
-			{
-				"buffer_size": 691,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/userPanel.html",
-			"settings":
-			{
-				"buffer_size": 2686,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/adminPanel.html",
-			"settings":
-			{
-				"buffer_size": 4156,
-				"line_ending": "Unix"
 			}
 		},
 		{
@@ -245,11 +216,11 @@
 			}
 		},
 		{
-			"file": "templates/dayInfo.html",
+			"file": "TODO",
 			"settings":
 			{
-				"buffer_size": 2973,
-				"line_ending": "Windows"
+				"buffer_size": 113,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -269,38 +240,22 @@
 			}
 		},
 		{
-			"file": "static/undo2.svg",
+			"file": "templates/dayInfo.html",
 			"settings":
 			{
-				"buffer_size": 3063,
+				"buffer_size": 2973,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "static/css/styles.css",
-			"settings":
-			{
-				"buffer_size": 2752,
-				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 265.0,
+		"height": 52.0,
 		"selected_items":
 		[
 			[
-				"fig",
-				"Figlet: Add Text"
-			],
-			[
-				"figl",
-				"Figlet: Add Text"
-			],
-			[
-				"Package Control: ",
+				"Package Control: ins",
 				"Package Control: Install Package"
 			],
 			[
@@ -308,7 +263,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -319,15 +274,28 @@
 		"menu_visible": true,
 		"show_minimap": false,
 		"show_open_files": false,
-		"show_tabs": false,
+		"show_tabs": true,
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
 	"file_history":
 	[
-		"/D/Library/Documents/Job Applications/coverLetter-SpaceApe.txt",
-		"/D/Library/Documents/Job Applications/coverLetter.txt",
-		"/D/Library/Documents/Job Applications/coverLetter-KOTA.txt",
+		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/helpPanel.html",
+		"/D/Library/Documents/Python/py/flask_mailSend1.py",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/userPanel.html",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/adminPanel.html",
+		"/home/jonty/Dropbox/py/RequestCalendar/schema.sql",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/dayInfo.html",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/index.html",
+		"/home/jonty/Dropbox/py/RequestCalendar/templates/base.html",
+		"/home/jonty/Dropbox/py/RequestCalendar/static/css/styles.css",
+		"/home/jonty/Dropbox/py/RequestCalendar/TODO",
+		"/home/jonty/Dropbox/py/RequestCalendar/webapp.py",
+		"/home/jonty/Sublime Text 2/Pristine Packages/Python.sublime-package",
+		"/home/jonty/Sublime Text 2/lib/python26.zip",
+		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-workspace",
+		"/home/jonty/Dropbox/py/RequestCalendar/reqcal.sublime-project",
 		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
 		"/C/Users/Jonty/Desktop/if",
 		"/D/Library/Dropbox/py/RequestCalendar/templates/emailA.txt",
@@ -360,6 +328,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)",
 			"notify",
 			"add_Month",
 			"addMonth",
@@ -398,103 +367,23 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "webapp.py",
+					"file": "__init__.py",
 					"settings":
 					{
-						"buffer_size": 26135,
+						"buffer_size": 590,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								636,
-								636
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "templates/resInfo.html",
-					"settings":
-					{
-						"buffer_size": 453,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								356,
-								356
-							]
-						],
-						"settings":
-						{
-							"auto_name": "{% extends 'base.html' %}",
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "README.md",
-					"settings":
-					{
-						"buffer_size": 1966,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1966,
-								1966
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/D/Library/Documents/Python/py/flask_mailSend1.py",
-					"settings":
-					{
-						"buffer_size": 691,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								570,
-								444
+								0,
+								0
 							]
 						],
 						"settings":
@@ -510,61 +399,34 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "templates/userPanel.html",
+					"buffer": 1,
+					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 2686,
+						"buffer_size": 25702,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								684,
-								684
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 108.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "templates/adminPanel.html",
-					"settings":
-					{
-						"buffer_size": 4156,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1795,
-								1795
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
+					"buffer": 2,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -575,8 +437,8 @@
 						"selection":
 						[
 							[
-								234,
-								234
+								0,
+								0
 							]
 						],
 						"settings":
@@ -592,7 +454,87 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 3,
+					"file": "TODO",
+					"settings":
+					{
+						"buffer_size": 113,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/index.html",
+					"settings":
+					{
+						"buffer_size": 6085,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/base.html",
+					"settings":
+					{
+						"buffer_size": 2023,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								588,
+								588
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
@@ -609,118 +551,11 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 130.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"file": "templates/index.html",
-					"settings":
-					{
-						"buffer_size": 6085,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2225,
-								2225
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 702.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "templates/base.html",
-					"settings":
-					{
-						"buffer_size": 2023,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								937,
-								937
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "static/undo2.svg",
-					"settings":
-					{
-						"buffer_size": 3063,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3063,
-								169
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "static/css/styles.css",
-					"settings":
-					{
-						"buffer_size": 2752,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2653,
-								2653
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3413.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -778,11 +613,11 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"show_minimap": true,
 	"show_open_files": false,

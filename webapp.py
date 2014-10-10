@@ -86,7 +86,9 @@ def dayInfo():
 		day, month = showInfo
 		day = int(day)
 		monthNum = MONTHS.index(month)
-		weekday = WEEKDAYS[datetime.date(year, monthNum, day).weekday()]
+		print ">>> DayInfo, y{}, m{}, d{}".format(year, monthNum, day)
+		##monthnum+1 used as months are handled 0-11 here but 1-12 in datetime
+		weekday = WEEKDAYS[datetime.date(year, monthNum+1, day).weekday()]
 
 		if session.get('logged_in', 0):
 			login = (1, session.get('username', "NAMENOTFOUND"))
@@ -439,34 +441,35 @@ def getLogin():
 #            mMm               mMm      M m M
 #            mMm               mMm        M  
 
+# Mobile functionality has been posponed and layout has been tweaked to work well on mobile browsers instead of via a custom app
+# This may be added in the future
 
 
+# ## MOBILE INTERFACE FUNCTIONS
+# @app.route('/m/dayInfo', methods=["POST"])
+# def DayInfo_M():
+# 	print ">>> DayInfo_M", request.form
+# 	day = int(request.form.get('day'))
+# 	month = int(request.form.get('month'))
+# 	year = int(request.form.get('year'))
 
-## MOBILE INTERFACE FUNCTIONS
-@app.route('/m/dayInfo', methods=["POST"])
-def DayInfo_M():
-	print ">>> DayInfo_M", request.form
-	day = int(request.form.get('day'))
-	month = int(request.form.get('month'))
-	year = int(request.form.get('year'))
-
-	dayData = get_dayData(day, month, year)
-	#(eventClaimer, eventDescription, eventConfirms, eventDenies)
-	if dayData is None:
-		return jsonify(day=None)
-	else:
-		## split confirms and denies to lists, filter out any "" strings from stray commas 
-		print dayData[2]
-		confirms = filter(lambda a: a!="", dayData[2].split(","))
-		print confirms
-		denies = filter(lambda a: a!="", dayData[3].split(","))
-		## return all the information the app needs to form the page
-		return jsonify({
-			"claimer": dayData[0],
-			"description": dayData[1],
-			"confirms": confirms,
-			"denies": denies
-			})
+# 	dayData = get_dayData(day, month, year)
+# 	#(eventClaimer, eventDescription, eventConfirms, eventDenies)
+# 	if dayData is None:
+# 		return jsonify(day=None)
+# 	else:
+# 		## split confirms and denies to lists, filter out any "" strings from stray commas 
+# 		print dayData[2]
+# 		confirms = filter(lambda a: a!="", dayData[2].split(","))
+# 		print confirms
+# 		denies = filter(lambda a: a!="", dayData[3].split(","))
+# 		## return all the information the app needs to form the page
+# 		return jsonify({
+# 			"claimer": dayData[0],
+# 			"description": dayData[1],
+# 			"confirms": confirms,
+# 			"denies": denies
+# 			})
 
 
 

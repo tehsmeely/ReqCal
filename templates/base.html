@@ -1,5 +1,6 @@
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width+100; initial-scale=0.8; maximum-scale=0.9;">
 	{% block title %}<title>Calendar</title>{% endblock %}
 	<link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
 	
@@ -18,13 +19,13 @@
 <body>
 	{% block backButton %} <!-- overwrite in child to remove -->
 	<!--<div style="float: left;">-->
-	<div style="text-align: left; position: fixed; float: left; top: 3px; left: 3px;">
+	<div style="text-align: left; position: fixed; float: left; top: 3px; left: 3px; overflow: auto;">
 	<a href="{{ url_for('index') }}"><img class="logIcon" src="{{ url_for('static', filename='backward.png') }}"></a>
 	</div>
 
 	{% endblock %}
 	{% block loginButton %} <!-- overwrite in child to remove -->
-	<div style="text-align: right; position: fixed; float: right; top: 3px; right: 3px;">
+	<div style="text-align: right; position: fixed; float: right; top: 3px; right: 3px; overflow: auto;">
 	{% if login[0] -%} You are logged in as {{ login[1] }}  <a href="{{ url_for('logout') }}"><img class="logIcon" src="{{ url_for('static', filename='exit.png') }}"></a>
 		{% if login[1] == "Admin" %}
 		<div style="text-align: right;">Go to <a href="{{ url_for('adminPanel') }}">admin panel</a></div>
