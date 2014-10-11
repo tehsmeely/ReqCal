@@ -14,7 +14,7 @@
 
 ##used for database path definition
 import os
-from RequestSettings import app
+from RequestCalendar import app
 #Database path
 DATABASE=os.path.join(app.root_path, 'events.db')
 
@@ -27,3 +27,7 @@ SECRET_KEY=')^\x1cs\xbf\xc3\xd8\xda\xc5\x82\xb6I\x1ei\xb7\xf3\x7f\xd1\xcf\xad\xf
 
 ## Email defaults to off, set in user settings
 USE_EMAIL = False
+
+## Resourse Info also defaults to None
+IMAGE_FILENAME=None
+RES_DESCRIPTION=None

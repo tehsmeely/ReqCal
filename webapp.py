@@ -205,10 +205,18 @@ def dayInfoUpdate(year, month, day, user, status):
 		updateUserEventStatus(day, month, year, user, status)
 	return redirect(url_for('dayInfo'))
 
+########  ########  ######  #### ##    ## ########  #######
+##     ## ##       ##    ##  ##  ###   ## ##       ##     ##
+##     ## ##       ##        ##  ####  ## ##       ##     ##
+########  ######    ######   ##  ## ## ## ######   ##     ##
+##   ##   ##             ##  ##  ##  #### ##       ##     ##
+##    ##  ##       ##    ##  ##  ##   ### ##       ##     ##
+##     ## ########  ######  #### ##    ## ##        #######
+
 @app.route('/resInfo')
 def resInfo():
 	##resource info, serves page with customised info on the shared resource
-	image = "boat.png"
+	image = app.config.get('IMAGE_FILENAME', None)
 	print url_for('static', filename='resource/description.txt')
 	try:
 		f = app.open_resource("./" + url_for('static', filename='resource/description.txt'))
