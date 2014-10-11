@@ -110,7 +110,7 @@
 
 					<tbody>
 					
-						{% if today != None %}<div id='ordify'>{{today}}</div>{% endif %}
+						{% if today != None %}<div class='ordify'>{{today}}</div>{% endif %}
 						{% if today == None %}<a href="{{ url_for('currMonth') }}"><img src="{{ url_for('static', filename='homeCal.png') }}"></a>{% endif %}
 						
 						<!-- "other-month" class is invoked if the date is >10 (if is end dates from previous month ~30) -->

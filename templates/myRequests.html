@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<style>
+		.centerTable tr {text-align: center}
+	</style>
+{% endblock %}
+}
+{% block body %}
+<div style="text-align: center;">
+	PAST
+	<table align="center" class="centerTable">
+		{% for req in pastRequests %}
+		<tr>
+			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
+				{{req[2]}}</td>
+
+			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	FUTURE
+	<table align="center" class="centerTable">
+		{% for req in futureRequests %}
+		<tr>
+			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
+				{{req[2]}}</td>
+
+			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+
+</div>
+{% endblock %}

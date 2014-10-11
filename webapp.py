@@ -194,6 +194,12 @@ def dayInfo():
  		return render_template("dayInfo.html", day=day, month=(monthNum, month), year=year, weekday=weekday, claimer=claimer, dayData=dayData, login=login, past=past)
 	return redirect(url_for("index"))
 
+
+@app.route('/dayInfo/show/<year>/<month>/<day>')
+	##because dayInfo uses post or a varsaved in session to get day month and year,
+	##then load this into session and then redirect to dayInfo
+
+
 @app.route('/dayInfoUpdate/<year>/<month>/<day>/<user>/<status>')
 def dayInfoUpdate(year, month, day, user, status):
 	print "DayInfoUpdate", year, month, day, user, status
@@ -326,6 +332,71 @@ def userPanel():
 
 
 		return render_template('userPanel.html', login=login, notifSettings=notifSettings, email=email)
+
+@app.route('/userPanel/myRequests')
+def myRequests():
+	## A page to show all requests by user. Will be split into a hidden list of past requests and a visible list of
+	## future/present ones, each with links so said dayInfo
+
+	login = getLogin()
+	if login[0] == 0:
+		return redirect(url_for('index'))
+
+	userRequests = get_userRequests(login[1])
+	#[(dayNum, monthNum, yearNum, eventStatus), ...]
+
+	today = datetime.date.today()
+	## now filter for past events
+	pastRequests = []
+	futureRequests = []
+	for request in userRequests:
+		##YEAR
+		## if year < this year, must be in past
+		if request[2] < today.year:
+			past = True
+		## if year > this year, must be in future
+		elif request[2] < today.year:
+			past = False
+
+		##now it must be this year, we can check using months now
+
+		##MONTH
+		# today.month must be -1 to account for 1-12 or 0-11 difference
+		## and earlier month in this year
+		elif request[1] < today.month-1:
+			past = True
+		# a later month in this year
+		elif request[1] > today.month-1:
+			past = False
+
+		##now it must be this month, check finaly to days
+
+		##DAY
+		## just check if day is less than current, so is in past
+		elif request[0] < today.day:
+			past = True
+		## finally drop it to future
+		else:
+			past = False
+
+		#now add to split lists modify month and status to strings
+		status = ['Denied', 'Pending', 'Confirmed'][request[3]+1]
+		request = [request[0], MONTHS[request[1]], request[2], (request[3], status)]
+		if past:
+			pastRequests.append(request)
+		else:
+			futureRequests.append(request)
+
+	##We now have two lists of events
+
+
+
+	return render_template('myRequests.html',login=login,pastRequests=pastRequests,futureRequests=futureRequests)
+
+
+
+
+
 
 @app.route('/helpPanel')
 def helpPanel():
@@ -667,6 +738,14 @@ def close_db(error):
 	if hasattr(g, 'user_db'):
 		g.user_db.close()
 
+########                ##     ## ########  ########     ###    ######## ########
+##     ##               ##     ## ##     ## ##     ##   ## ##      ##    ##
+##     ##               ##     ## ##     ## ##     ##  ##   ##     ##    ##
+##     ##    #######    ##     ## ########  ##     ## ##     ##    ##    ######
+##     ##               ##     ## ##        ##     ## #########    ##    ##
+##     ##               ##     ## ##        ##     ## ##     ##    ##    ##
+########                 #######  ##        ########  ##     ##    ##    ########
+
 
 def updateEventStatus(day, month, year, status):
 	##updates the overall status of event
@@ -743,6 +822,14 @@ def filterEvents(eventList):
 			pendL.append(item[0])
 	return confL, pendL, denL
 
+########                 ######   ######## ########
+##     ##               ##    ##  ##          ##
+##     ##               ##        ##          ##
+##     ##    #######    ##   #### ######      ##
+##     ##               ##    ##  ##          ##
+##     ##               ##    ##  ##          ##
+########                 ######   ########    ##
+
 
 def get_monthEvents(month, year):
 	#month is 0-11, same in db
@@ -797,6 +884,16 @@ def get_userDict():
 	output = db.execute("SELECT username, passHash from users").fetchall()
 	return {k[0]:k[1] for k in output}
 
+
+
+def get_userRequests(user):
+	print ">>> get_userEvents"
+	db = get_db()
+	events = db.execute("SELECT dayNum, monthNum, yearNum, eventStatus from events where eventClaim=?", (user,)).fetchall()
+	print ">>> get_userEvents selection: ", events
+	return events
+
+
 def get_userSettings(user):
 	print ">>> get_userSettings for {}".format(user)
 	db = get_db()
@@ -807,21 +904,19 @@ def get_userSettings(user):
 	else:
 		return output
 	
-def set_userEmail(email, user):
-	db = get_db()
-	user = user[0].upper() + user[1:]
-	db.execute("UPDATE users set email=? WHERE username=?", (email, user))
-	db.commit()
-
-def set_userNotifSetting(notificationSettings, user):
-	db = get_db()
-	db.execute("UPDATE users set notificationSettings=? WHERE username=?", (notificationSettings, user))
-	db.commit()
 
 def get_allUserEmails():
 	db = get_db()
 	cursor = db.execute("SELECT username, notificationSettings, email from users where email is not null")
 	return cursor.fetchall()
+
+########                   ###    ########  ########
+##     ##                 ## ##   ##     ## ##     ##
+##     ##                ##   ##  ##     ## ##     ##
+##     ##    #######    ##     ## ##     ## ##     ##
+##     ##               ######### ##     ## ##     ##
+##     ##               ##     ## ##     ## ##     ##
+########                ##     ## ########  ########
 
 def add_MonthEvent(day, month, year, claimer, description):
 	notifyAll('C', day, month, year, description, specialUser=claimer)
@@ -840,6 +935,34 @@ def add_User(user, password):
 	db = get_db()
 	db.execute('INSERT into users (username, passHash, notificationSettings) values (?, ?, ?)',(user, generate_password_hash(password), "") )
 	db.commit()
+
+########                 ######  ######## ########
+##     ##               ##    ## ##          ##
+##     ##               ##       ##          ##
+##     ##    #######     ######  ######      ##
+##     ##                     ## ##          ##
+##     ##               ##    ## ##          ##
+########                 ######  ########    ##
+
+def set_userEmail(email, user):
+	db = get_db()
+	user = user[0].upper() + user[1:]
+	db.execute("UPDATE users set email=? WHERE username=?", (email, user))
+	db.commit()
+
+def set_userNotifSetting(notificationSettings, user):
+	db = get_db()
+	db.execute("UPDATE users set notificationSettings=? WHERE username=?", (notificationSettings, user))
+	db.commit()
+
+
+########                 #######  ######## ##     ## ######## ########
+##     ##               ##     ##    ##    ##     ## ##       ##     ##
+##     ##               ##     ##    ##    ##     ## ##       ##     ##
+##     ##    #######    ##     ##    ##    ######### ######   ########
+##     ##               ##     ##    ##    ##     ## ##       ##   ##
+##     ##               ##     ##    ##    ##     ## ##       ##    ##
+########                 #######     ##    ##     ## ######## ##     ##
 
 def del_User(user):
 	## dlete user from db. check if user is present at first, if so remove and check is not in list afterwards, with message responses
