@@ -13,7 +13,8 @@ app.config.from_object('RequestCalendar.defaultSettings')
 
 
 ##User config
-app.config.from_object
+#app.config.from_object('RequestCalendar.userSettings') replaced by dev for time being
+app.config.from_object('RequestCalendar.userSettings_dev')
 
 ## Email setup
 if app.config['USE_EMAIL']:

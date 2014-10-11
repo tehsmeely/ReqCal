@@ -217,20 +217,14 @@ def dayInfoUpdate(year, month, day, user, status):
 def resInfo():
 	##resource info, serves page with customised info on the shared resource
 	image = app.config.get('IMAGE_FILENAME', None)
-	print url_for('static', filename='resource/description.txt')
-	try:
-		f = app.open_resource("./" + url_for('static', filename='resource/description.txt'))
-		desc = f.read()
-		print ">>> resInfo, file opened"
-	except IOError:
-		desc = None
-		print ">>> resInfo, file NOT opened"
+	desc = app.config.get('RES_DESCRIPTION')
+
 	return render_template('resInfo.html', login=getLogin(), image=image, desc=desc)
 
 @app.template_filter()
 @evalcontextfilter
 def nl2br(eval_ctx, value):
-    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', Markup('<br>\n')) \
         for p in _paragraph_re.split(escape(value)))
     if eval_ctx.autoescape:
         result = Markup(result)

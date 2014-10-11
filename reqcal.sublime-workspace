@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"from",
+				"from_object"
+			],
+			[
+				"re",
+				"RequestCalendar"
+			],
+			[
+				"Req",
+				"RequestCalendar"
+			],
+			[
+				"Re",
+				"RequestCalendar"
+			],
+			[
 				"event",
 				"eventDenies"
 			],
@@ -195,7 +211,7 @@
 			"file": "__init__.py",
 			"settings":
 			{
-				"buffer_size": 590,
+				"buffer_size": 487,
 				"line_ending": "Windows"
 			}
 		},
@@ -203,8 +219,32 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 25702,
+				"buffer_size": 27300,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "userSettings-dev.py",
+			"settings":
+			{
+				"buffer_size": 1667,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "userSettings.py",
+			"settings":
+			{
+				"buffer_size": 1568,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "defaultSettings.py",
+			"settings":
+			{
+				"buffer_size": 1651,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -219,7 +259,7 @@
 			"file": "TODO",
 			"settings":
 			{
-				"buffer_size": 113,
+				"buffer_size": 342,
 				"line_ending": "Unix"
 			}
 		},
@@ -227,7 +267,7 @@
 			"file": "templates/index.html",
 			"settings":
 			{
-				"buffer_size": 6085,
+				"buffer_size": 6101,
 				"line_ending": "Unix"
 			}
 		},
@@ -235,7 +275,7 @@
 			"file": "templates/base.html",
 			"settings":
 			{
-				"buffer_size": 2023,
+				"buffer_size": 2119,
 				"line_ending": "Unix"
 			}
 		},
@@ -243,7 +283,7 @@
 			"file": "templates/dayInfo.html",
 			"settings":
 			{
-				"buffer_size": 2973,
+				"buffer_size": 3139,
 				"line_ending": "Windows"
 			}
 		}
@@ -251,9 +291,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 52.0,
+		"height": 232.0,
 		"selected_items":
 		[
+			[
+				"fig",
+				"Figlet: Add Text"
+			],
+			[
+				"",
+				"Figlet: Add Text"
+			],
 			[
 				"Package Control: ins",
 				"Package Control: Install Package"
@@ -280,6 +328,7 @@
 	},
 	"file_history":
 	[
+		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/testSettings.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
 		"/home/jonty/Dropbox/py/RequestCalendar/templates/helpPanel.html",
 		"/D/Library/Documents/Python/py/flask_mailSend1.py",
@@ -318,7 +367,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 		]
@@ -328,6 +377,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"True",
+			"notifyAll",
+			"updateUserEventStatus",
 			"if session.get('logged_in', 0):\n		login = (1, session.get('username', \"NAMENOTFOUND\"))\n	else:\n		login = (0, None)",
 			"notify",
 			"add_Month",
@@ -367,7 +419,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -375,15 +427,15 @@
 					"file": "__init__.py",
 					"settings":
 					{
-						"buffer_size": 590,
+						"buffer_size": 487,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								333,
+								333
 							]
 						],
 						"settings":
@@ -403,15 +455,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 25702,
+						"buffer_size": 27300,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								6992,
+								6992
 							]
 						],
 						"settings":
@@ -420,13 +472,93 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2908.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "userSettings-dev.py",
+					"settings":
+					{
+						"buffer_size": 1667,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1292,
+								1292
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "userSettings.py",
+					"settings":
+					{
+						"buffer_size": 1568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1292,
+								1292
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "defaultSettings.py",
+					"settings":
+					{
+						"buffer_size": 1651,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1651,
+								1651
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -454,19 +586,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 6,
 					"file": "TODO",
 					"settings":
 					{
-						"buffer_size": 113,
+						"buffer_size": 342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								342,
+								342
 							]
 						],
 						"settings":
@@ -480,19 +612,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 7,
 					"file": "templates/index.html",
 					"settings":
 					{
-						"buffer_size": 6085,
+						"buffer_size": 6101,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2209,
+								2209
 							]
 						],
 						"settings":
@@ -501,25 +633,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 720.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 8,
 					"file": "templates/base.html",
 					"settings":
 					{
-						"buffer_size": 2023,
+						"buffer_size": 2119,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								588,
-								588
+								1205,
+								1205
 							]
 						],
 						"settings":
@@ -534,19 +666,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 9,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
-						"buffer_size": 2973,
+						"buffer_size": 3139,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3116,
+								3116
 							]
 						],
 						"settings":
@@ -555,7 +687,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 675.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
