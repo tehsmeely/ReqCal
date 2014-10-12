@@ -70,15 +70,17 @@ def index():
 
 @app.route('/dayInfo', methods=['POST', 'GET'])
 def dayInfo():
-	print request.method
 
 	showInfo = None
 	if request.method == 'POST':
+		print ">>> dayInfo loading from POST"
 		## Request dict comes as {'dayMon': day#month}
 		showInfo = request.form.get('dayMon').split('#')
+		print ">>> dayInfo: 'showInfo' = ", showInfo
 		session['dayInfo'] = showInfo
 	##also store most request requst into session for resuming
 	elif "dayInfo" in session:
+		print ">>> dayInfo loading from session"
 		showInfo = session['dayInfo']
 	
 
@@ -86,7 +88,7 @@ def dayInfo():
 
 	if showInfo is not None:
 		
-		year = session.get('year', datetime.date.today().year)
+		year = int(session.get('year', datetime.date.today().year))
 		
 		day, month = showInfo
 		day = int(day)
@@ -195,9 +197,15 @@ def dayInfo():
 	return redirect(url_for("index"))
 
 
-@app.route('/dayInfo/show/<year>/<month>/<day>')
+@app.route('/dayInfo_show/<year>/<month>/<day>')
+def dayInfo_show(year, month, day):
 	##because dayInfo uses post or a varsaved in session to get day month and year,
-	##then load this into session and then redirect to dayInfo
+	##so load this into session and then redirect to dayInfo
+	print ">>> dayInfo_show: d{}, m{}, y{}".format(day, month, year)
+	showInfo = [day, month]
+	session['dayInfo'] = showInfo
+	session['year'] = year
+	return redirect(url_for('dayInfo'))
 
 
 @app.route('/dayInfoUpdate/<year>/<month>/<day>/<user>/<status>')
@@ -332,6 +340,14 @@ def userPanel():
 
 
 		return render_template('userPanel.html', login=login, notifSettings=notifSettings, email=email)
+
+##     ## ##    ## ########  ########  #######  ##     ## ########  ######  ########  ######
+###   ###  ##  ##  ##     ## ##       ##     ## ##     ## ##       ##    ##    ##    ##    ##
+#### ####   ####   ##     ## ##       ##     ## ##     ## ##       ##          ##    ##
+## ### ##    ##    ########  ######   ##     ## ##     ## ######    ######     ##     ######
+##     ##    ##    ##   ##   ##       ##  ## ## ##     ## ##             ##    ##          ##
+##     ##    ##    ##    ##  ##       ##    ##  ##     ## ##       ##    ##    ##    ##    ##
+##     ##    ##    ##     ## ########  ##### ##  #######  ########  ######     ##     ######
 
 @app.route('/userPanel/myRequests')
 def myRequests():

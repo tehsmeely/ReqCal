@@ -3,7 +3,45 @@
 {% block head %}
 	<style>
 		.centerTable tr {text-align: center}
+		tr 
+		{
+			cursor: pointer;
+		}
 	</style>
+
+
+	<script>
+		$(function(){
+
+			var baseURL = "{{url_for('dayInfo_show', day='-0-', month='-1-', year='-2-' )}}";
+
+			$('tr').each(function(){
+				$(this).click(function(){
+
+					var day = $(this).attr('day');
+					var month = $(this).attr('month');
+					var year = $(this).attr('year');
+					console.log(day + month + year);
+					console.log(baseURL);
+					newURL = baseURL.replace("-0-", day);
+					newURL = newURL.replace("-1-", month);
+					newURL = newURL.replace("-2-", year);
+					console.log(newURL);
+					window.location.href = newURL;
+
+
+				});
+			});
+
+
+
+
+
+
+		})
+
+
+	</script>
 {% endblock %}
 }
 {% block body %}
@@ -11,11 +49,13 @@
 	PAST
 	<table align="center" class="centerTable">
 		{% for req in pastRequests %}
-		<tr>
+		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
+			<a href="{{url_for('dayInfo_show', day=req[0], month=req[1], year=req[2])}}">
 			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
 				{{req[2]}}</td>
 
 			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
+			</a>
 		</tr>
 		{% endfor %}
 	</table>
@@ -23,11 +63,13 @@
 	FUTURE
 	<table align="center" class="centerTable">
 		{% for req in futureRequests %}
-		<tr>
+		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
+			<a href="{{url_for('dayInfo_show', day=req[0], month=req[1], year=req[2])}}">
 			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
 				{{req[2]}}</td>
 
 			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
+			</a>
 		</tr>
 		{% endfor %}
 	</table>

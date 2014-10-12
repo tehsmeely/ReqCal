@@ -4,6 +4,42 @@
 		"selected_items":
 		[
 			[
+				"eve",
+				"events"
+			],
+			[
+				"get_user",
+				"get_userEvents"
+			],
+			[
+				"futu",
+				"futureRequests"
+			],
+			[
+				"pas",
+				"pastRequests"
+			],
+			[
+				"future",
+				"futureEvents"
+			],
+			[
+				"fu",
+				"futureEvents"
+			],
+			[
+				"past",
+				"pastEvents"
+			],
+			[
+				"use",
+				"userEvents"
+			],
+			[
+				"user",
+				"userPanel"
+			],
+			[
 				"from",
 				"from_object"
 			],
@@ -92,10 +128,6 @@
 				"USE_EMAIL"
 			],
 			[
-				"get_user",
-				"get_allUserEmails"
-			],
-			[
 				"change",
 				"changePasswordForm"
 			],
@@ -118,10 +150,6 @@
 			[
 				"init",
 				"initialise"
-			],
-			[
-				"eve",
-				"eventDenies"
 			],
 			[
 				"add_",
@@ -192,10 +220,6 @@
 				"get_userList"
 			],
 			[
-				"user",
-				"userlist"
-			],
-			[
 				"eventDe",
 				"eventDescription"
 			],
@@ -211,7 +235,7 @@
 			"file": "__init__.py",
 			"settings":
 			{
-				"buffer_size": 487,
+				"buffer_size": 610,
 				"line_ending": "Windows"
 			}
 		},
@@ -219,16 +243,57 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 27300,
+				"buffer_size": 31325,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "userSettings-dev.py",
+			"file": "templates/myRequests.html",
+			"settings":
+			{
+				"buffer_size": 1164,
+				"line_ending": "Unix",
+				"name": "{% extends 'base.html' %}"
+			}
+		},
+		{
+			"file": "static/js/functions.js",
+			"settings":
+			{
+				"buffer_size": 514,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/adminPanel.html",
+			"settings":
+			{
+				"buffer_size": 4156,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "schema.sql",
+			"settings":
+			{
+				"buffer_size": 477,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "userSettings_dev.py",
 			"settings":
 			{
 				"buffer_size": 1667,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/resInfo.html",
+			"settings":
+			{
+				"buffer_size": 453,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -248,18 +313,10 @@
 			}
 		},
 		{
-			"file": "schema.sql",
-			"settings":
-			{
-				"buffer_size": 477,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "TODO",
 			"settings":
 			{
-				"buffer_size": 342,
+				"buffer_size": 370,
 				"line_ending": "Unix"
 			}
 		},
@@ -267,7 +324,7 @@
 			"file": "templates/index.html",
 			"settings":
 			{
-				"buffer_size": 6101,
+				"buffer_size": 6104,
 				"line_ending": "Unix"
 			}
 		},
@@ -275,7 +332,7 @@
 			"file": "templates/base.html",
 			"settings":
 			{
-				"buffer_size": 2119,
+				"buffer_size": 2130,
 				"line_ending": "Unix"
 			}
 		},
@@ -283,7 +340,7 @@
 			"file": "templates/dayInfo.html",
 			"settings":
 			{
-				"buffer_size": 3139,
+				"buffer_size": 3142,
 				"line_ending": "Windows"
 			}
 		}
@@ -291,9 +348,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 232.0,
+		"height": 392.0,
 		"selected_items":
 		[
+			[
+				"fi",
+				"Figlet: Add Text"
+			],
 			[
 				"fig",
 				"Figlet: Add Text"
@@ -328,6 +389,7 @@
 	},
 	"file_history":
 	[
+		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/userSettings-dev.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/testSettings.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
 		"/home/jonty/Dropbox/py/RequestCalendar/templates/helpPanel.html",
@@ -367,7 +429,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 		]
@@ -377,6 +439,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"id='ordify'",
+			"ordify",
 			"True",
 			"notifyAll",
 			"updateUserEventStatus",
@@ -419,7 +483,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -427,15 +491,15 @@
 					"file": "__init__.py",
 					"settings":
 					{
-						"buffer_size": 487,
+						"buffer_size": 610,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								333,
-								333
+								293,
+								293
 							]
 						],
 						"settings":
@@ -455,15 +519,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 27300,
+						"buffer_size": 31325,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6992,
-								6992
+								12309,
+								12309
 							]
 						],
 						"settings":
@@ -472,14 +536,123 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2908.0,
+						"translation.y": 5190.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "userSettings-dev.py",
+					"file": "templates/myRequests.html",
+					"settings":
+					{
+						"buffer_size": 1164,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								615,
+								615
+							]
+						],
+						"settings":
+						{
+							"auto_name": "{% extends 'base.html' %}",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "static/js/functions.js",
+					"settings":
+					{
+						"buffer_size": 514,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								39,
+								39
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/adminPanel.html",
+					"settings":
+					{
+						"buffer_size": 4156,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								44,
+								44
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 720.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "schema.sql",
+					"settings":
+					{
+						"buffer_size": 477,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								91,
+								91
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/SQL/SQL.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "userSettings_dev.py",
 					"settings":
 					{
 						"buffer_size": 1667,
@@ -489,8 +662,8 @@
 						"selection":
 						[
 							[
-								1292,
-								1292
+								1611,
+								1611
 							]
 						],
 						"settings":
@@ -504,7 +677,34 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 7,
+					"file": "templates/resInfo.html",
+					"settings":
+					{
+						"buffer_size": 453,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								356,
+								356
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "userSettings.py",
 					"settings":
 					{
@@ -530,7 +730,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 9,
 					"file": "defaultSettings.py",
 					"settings":
 					{
@@ -558,47 +758,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "schema.sql",
-					"settings":
-					{
-						"buffer_size": 477,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/SQL/SQL.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
+					"buffer": 10,
 					"file": "TODO",
 					"settings":
 					{
-						"buffer_size": 342,
+						"buffer_size": 370,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								342,
-								342
+								304,
+								304
 							]
 						],
 						"settings":
@@ -612,19 +784,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 11,
 					"file": "templates/index.html",
 					"settings":
 					{
-						"buffer_size": 6101,
+						"buffer_size": 6104,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2209,
-								2209
+								2444,
+								2444
 							]
 						],
 						"settings":
@@ -633,25 +805,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 746.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 12,
 					"file": "templates/base.html",
 					"settings":
 					{
-						"buffer_size": 2119,
+						"buffer_size": 2130,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1205,
-								1205
+								703,
+								703
 							]
 						],
 						"settings":
@@ -666,19 +838,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 13,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
-						"buffer_size": 3139,
+						"buffer_size": 3142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3116,
-								3116
+								945,
+								945
 							]
 						],
 						"settings":
@@ -687,7 +859,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 675.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
