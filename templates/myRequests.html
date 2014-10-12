@@ -6,6 +6,17 @@
 		tr 
 		{
 			cursor: pointer;
+			border: 2px solid;
+		}
+
+		tr:hover
+		{
+			background-color: #fff;
+		}
+		td
+		{ 
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 	</style>
 
@@ -50,27 +61,25 @@
 	<table align="center" class="centerTable">
 		{% for req in pastRequests %}
 		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
-			<a href="{{url_for('dayInfo_show', day=req[0], month=req[1], year=req[2])}}">
 			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
 				{{req[2]}}</td>
 
 			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
-			</a>
 		</tr>
+		<br>
 		{% endfor %}
 	</table>
-
+	<br><br>
 	FUTURE
 	<table align="center" class="centerTable">
 		{% for req in futureRequests %}
 		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
-			<a href="{{url_for('dayInfo_show', day=req[0], month=req[1], year=req[2])}}">
 			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
 				{{req[2]}}</td>
 
 			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
-			</a>
 		</tr>
+		<br>
 		{% endfor %}
 	</table>
 
