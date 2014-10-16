@@ -31,6 +31,7 @@
 		<div style="text-align: right;">Go to <a href="{{ url_for('adminPanel') }}">admin panel</a></div>
 		{% else %}
 		<div style="text-align: right;">Go to <a href="{{ url_for('userPanel') }}">user panel</a></div>
+		{% block myReq %}<div style="text-align: right;"><a href="{{ url_for('myRequests') }}">My requests</a></div>{% endblock %}
 		{% endif %}
 	{%- else -%}
 	You are not currently logged in: <a href="{{ url_for('login') }}"><img class="logIcon" src="{{ url_for('static', filename='entrance.png') }}"> Log In</a>{%- endif %}

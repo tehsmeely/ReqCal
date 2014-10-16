@@ -579,7 +579,7 @@ def getLogin():
 def genDays(month, year):
 	## correct with month+1 as datetime uses 1-12 not 0-11
 	print">>> genDays: m{} - y{}".format(month, year)
-	firstDay = datetime.date(year, month+1, 1).weekday()
+	firstDay = datetime.date(int(year), int(month)+1, 1).weekday()
 	days = range(1, MONTHLEN[month]+1)
 	if firstDay != 0:
 		prevMon = range(1, MONTHLEN[month-1]+1)[-firstDay:] #truncated list of end of previous month

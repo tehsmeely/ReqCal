@@ -4,6 +4,38 @@
 		"selected_items":
 		[
 			[
+				"but",
+				"butVal"
+			],
+			[
+				"button",
+				"button_past_ShowHide"
+			],
+			[
+				"butto",
+				"button_past_ShowHide"
+			],
+			[
+				"past",
+				"past_ShowHide"
+			],
+			[
+				"margin",
+				"margin-left"
+			],
+			[
+				"base",
+				"baseURL"
+			],
+			[
+				"day",
+				"dayInfo_show"
+			],
+			[
+				"show",
+				"showInfo"
+			],
+			[
 				"eve",
 				"events"
 			],
@@ -26,10 +58,6 @@
 			[
 				"fu",
 				"futureEvents"
-			],
-			[
-				"past",
-				"pastEvents"
 			],
 			[
 				"use",
@@ -243,7 +271,7 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 31325,
+				"buffer_size": 32315,
 				"line_ending": "Windows"
 			}
 		},
@@ -251,7 +279,7 @@
 			"file": "templates/myRequests.html",
 			"settings":
 			{
-				"buffer_size": 1164,
+				"buffer_size": 2770,
 				"line_ending": "Unix",
 				"name": "{% extends 'base.html' %}"
 			}
@@ -261,6 +289,22 @@
 			"settings":
 			{
 				"buffer_size": 514,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/index.html",
+			"settings":
+			{
+				"buffer_size": 6104,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/dayInfo.html",
+			"settings":
+			{
+				"buffer_size": 3142,
 				"line_ending": "Windows"
 			}
 		},
@@ -321,14 +365,6 @@
 			}
 		},
 		{
-			"file": "templates/index.html",
-			"settings":
-			{
-				"buffer_size": 6104,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "templates/base.html",
 			"settings":
 			{
@@ -337,26 +373,26 @@
 			}
 		},
 		{
-			"file": "templates/dayInfo.html",
+			"file": "static/css/styles.css",
 			"settings":
 			{
-				"buffer_size": 3142,
-				"line_ending": "Windows"
+				"buffer_size": 2752,
+				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 265.0,
 		"selected_items":
 		[
 			[
-				"fi",
+				"fig",
 				"Figlet: Add Text"
 			],
 			[
-				"fig",
+				"fi",
 				"Figlet: Add Text"
 			],
 			[
@@ -372,7 +408,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 449.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -389,6 +425,11 @@
 	},
 	"file_history":
 	[
+		"/C/Python27/test.xml",
+		"/C/Users/Jonty/Desktop/usb/events.xml",
+		"/C/Python27/testEvents.xml",
+		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/userSettings-dev.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/testSettings.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
@@ -419,9 +460,7 @@
 		"/D/Library/Dropbox/py/RequestCalendar/templates/addUser.html",
 		"/D/Library/Documents/Job Applications/CV/CV2page.tex",
 		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/LaTeXTools-master/LaTeX.sublime-build",
-		"/D/Library/Dropbox/Work Backup/Project/Report/Report.tex",
-		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings"
+		"/D/Library/Dropbox/Work Backup/Project/Report/Report.tex"
 	],
 	"find":
 	{
@@ -519,15 +558,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 31325,
+						"buffer_size": 32315,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12309,
-								12309
+								18472,
+								18472
 							]
 						],
 						"settings":
@@ -536,7 +575,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5190.0,
+						"translation.y": 10079.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -546,21 +585,22 @@
 					"file": "templates/myRequests.html",
 					"settings":
 					{
-						"buffer_size": 1164,
+						"buffer_size": 2770,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								615,
-								615
+								227,
+								53
 							]
 						],
 						"settings":
 						{
 							"auto_name": "{% extends 'base.html' %}",
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage"
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -597,6 +637,60 @@
 				},
 				{
 					"buffer": 4,
+					"file": "templates/index.html",
+					"settings":
+					{
+						"buffer_size": 6104,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								307,
+								307
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 80.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/dayInfo.html",
+					"settings":
+					{
+						"buffer_size": 3142,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								239,
+								74
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -623,7 +717,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -651,7 +745,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "userSettings_dev.py",
 					"settings":
 					{
@@ -677,7 +771,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "templates/resInfo.html",
 					"settings":
 					{
@@ -704,7 +798,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "userSettings.py",
 					"settings":
 					{
@@ -730,7 +824,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "defaultSettings.py",
 					"settings":
 					{
@@ -758,7 +852,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"file": "TODO",
 					"settings":
 					{
@@ -784,34 +878,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
-					"file": "templates/index.html",
-					"settings":
-					{
-						"buffer_size": 6104,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2444,
-								2444
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 746.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "templates/base.html",
 					"settings":
 					{
@@ -822,8 +889,8 @@
 						"selection":
 						[
 							[
-								703,
-								703
+								1033,
+								1033
 							]
 						],
 						"settings":
@@ -838,28 +905,28 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
-					"file": "templates/dayInfo.html",
+					"buffer": 14,
+					"file": "static/css/styles.css",
 					"settings":
 					{
-						"buffer_size": 3142,
+						"buffer_size": 2752,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								945,
-								945
+								584,
+								584
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 315.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

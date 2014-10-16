@@ -13,16 +13,64 @@
 		{
 			background-color: #fff;
 		}
+
+
+
+
+		tr.deniedT
+		{
+			background-color: #f99;
+		}
+
+		tr.deniedT:hover
+		{
+			background-color: #ffb8b8;
+		}
+
+		tr.pendingT
+		{
+			background-color: #f90;
+		}
+
+		tr.pendingT:hover
+		{
+			background-color: #ffb84d;
+		}
+
+		tr.confirmedT
+		{
+			background-color: #6f6;
+		}
+
+		tr.confirmedT:hover
+		{
+			background-color: #94ff94;
+		}
+		
 		td
 		{ 
+			width:140px;
+		}
+			/*
 			padding-left: 20px;
 			padding-right: 20px;
+		}
+		*/
+		#past_ShowHide
+		{
+			display: none;
 		}
 	</style>
 
 
 	<script>
 		$(function(){
+
+
+			//Handles making each TR into appropriate link
+
+			//baseURL makes use of jinja url_for in initial generation, and is then modified 
+			// for each button
 
 			var baseURL = "{{url_for('dayInfo_show', day='-0-', month='-1-', year='-2-' )}}";
 
@@ -46,6 +94,19 @@
 
 
 
+			$('#button_past_ShowHide').click(function(){
+				console.log("button clicked");
+				$('#past_ShowHide').slideToggle(function(){
+					var butVal =  $('#button_past_ShowHide').attr('value');
+					if (butVal == "Show") {butVal = "Hide";}
+					else {butVal = "Show";}
+					$('#button_past_ShowHide').attr('value', butVal);
+				});
+
+			});
+
+
+
 
 
 
@@ -54,26 +115,22 @@
 
 	</script>
 {% endblock %}
-}
+
+
+
+
+
+
+
+
+
 {% block body %}
+	{%block myReq %}{%endblock%}
 <div style="text-align: center;">
-	PAST
-	<table align="center" class="centerTable">
-		{% for req in pastRequests %}
-		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
-			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
-				{{req[2]}}</td>
-
-			<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
-		</tr>
-		<br>
-		{% endfor %}
-	</table>
-	<br><br>
-	FUTURE
-	<table align="center" class="centerTable">
+	<p>Requests in the future</p>
+		<table align="center" class="centerTable">
 		{% for req in futureRequests %}
-		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}">
+		<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}" class="{% if req[3][0] == 1 -%} confirmedT {-% elif req[3][0]  == -1 -%} deniedT {%- else -%} pendingT {%- endif %}">
 			<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
 				{{req[2]}}</td>
 
@@ -82,6 +139,24 @@
 		<br>
 		{% endfor %}
 	</table>
+	
+
+	<br><br>
+	Past Requests
+	<div id="past_ShowHide">
+		<table align="center" class="centerTable">
+			{% for req in pastRequests %}
+			<tr day="{{req[0]}}" month="{{req[1]}}" year="{{req[2]}}" class="{% if req[3][0] == 1 -%} confirmedT {-% elif req[3][0]  == -1 -%} deniedT {%- else -%} pendingT {%- endif %}">
+				<td><span class="ordify">{{req[0]}}</span> {{req[1]}}<br>
+					{{req[2]}}</td>
+
+				<td>{{req[3][1]}}<img class="levelIcon" src="{% if req[3][0] == 1 -%} {{ url_for('static', filename='confirmed.png') }} {% elif req[3][0]  == -1 %} {{ url_for('static', filename='denied.png') }} {%- else -%} {{ url_for('static', filename='pending.png') }} {%- endif %}"></td>
+			</tr>
+			<br>
+			{% endfor %}
+		</table>
+	</div>
+	<br><input type='button' value='Show' id='button_past_ShowHide'>
 
 
 </div>
