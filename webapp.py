@@ -290,6 +290,15 @@ def addRequest():
 	
 	return redirect(url_for('dayInfo'))
 
+@app.route('/deleteRequest/<year>/<month>/<day>', methods=["POST", "GET"])
+def deleteRequest(year, month, day):
+	login = getLogin()
+	if login[0] and login[1] == "Admin":
+		print ">>> deleteRequest: deleteing on y{} m{} d{}".format(year, month, day)
+		delete_Request(year, month, day)
+	return redirect(url_for('dayInfo'))
+
+
 
 ########     ###    ##    ## ######## ##        ######
 ##     ##   ## ##   ###   ## ##       ##       ##    ##
@@ -1005,6 +1014,16 @@ def change_Password(user, newPass):
 	db.execute("UPDATE users SET passHash=? where username=?", (generate_password_hash(newPass), user))
 	db.commit()
 	return "User " + user + ' has changed password to "' + newPass + '"'
+
+
+def delete_Request(year, month, day):
+
+	db = get_db()
+
+	db.execute("DELETE from events where yearNum=? and monthNum=? and dayNum=?", (year, month, day))
+	db.commit()
+
+
 
 
 

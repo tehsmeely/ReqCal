@@ -73,6 +73,11 @@
 				<p>Cannot change status, as day has already happened</p>
 				{% endif %}
 			{%- endif %}
+
+
+			{% if login[0] and login[1] == "Admin" %}
+				<a href="{{ url_for('deleteRequest', year=year, month=month[0], day=day) }}"><button>Delete This Request</button></a>
+			{% endif %}
 				
 		{% else %}
 		<!-- No Day Data, display such and offer to make request -->
