@@ -496,15 +496,22 @@ def adminPanel():
 
 
 
-
+##        #######   ######   #### ##    ##
+##       ##     ## ##    ##   ##  ###   ##
+##       ##     ## ##         ##  ####  ##
+##       ##     ## ##   ####  ##  ## ## ##
+##       ##     ## ##    ##   ##  ##  ####
+##       ##     ## ##    ##   ##  ##   ###
+########  #######   ######   #### ##    ##
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	print "Login page"
 	issue = None
 	logged_in = None
+	user = None #stores the previous attempted name for if password is incorrect
 	if session.get("logged_in"):
-		logged_in = session.get('username', "USERNAMENOTFOUND")
+		logged_in = session.get('username', "USERNAME NOT FOUND")
 	if request.method == 'POST':
 		print "LOGIN POST"
 		userDict = get_userDict()
@@ -523,7 +530,7 @@ def login():
 		else:
 			issue = "Username Not Found"
 
-	return render_template('loginPage.html', error=issue, logged_in=logged_in)
+	return render_template('loginPage.html', error=issue, logged_in=logged_in, prevName=user)
 
 
 @app.route('/logout')

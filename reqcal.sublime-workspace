@@ -4,36 +4,16 @@
 		"selected_items":
 		[
 			[
-				"but",
-				"butVal"
+				"delete",
+				"deleteRequest"
 			],
 			[
-				"button",
-				"button_past_ShowHide"
+				"get",
+				"getLogin"
 			],
 			[
-				"butto",
-				"button_past_ShowHide"
-			],
-			[
-				"past",
-				"past_ShowHide"
-			],
-			[
-				"margin",
-				"margin-left"
-			],
-			[
-				"base",
-				"baseURL"
-			],
-			[
-				"day",
-				"dayInfo_show"
-			],
-			[
-				"show",
-				"showInfo"
+				"back",
+				"background-color"
 			],
 			[
 				"eve",
@@ -58,6 +38,10 @@
 			[
 				"fu",
 				"futureEvents"
+			],
+			[
+				"past",
+				"pastEvents"
 			],
 			[
 				"use",
@@ -86,10 +70,6 @@
 			[
 				"event",
 				"eventDenies"
-			],
-			[
-				"get",
-				"getLogin"
 			],
 			[
 				"week",
@@ -271,7 +251,7 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 32315,
+				"buffer_size": 32808,
 				"line_ending": "Windows"
 			}
 		},
@@ -279,9 +259,17 @@
 			"file": "templates/myRequests.html",
 			"settings":
 			{
-				"buffer_size": 2770,
+				"buffer_size": 3372,
 				"line_ending": "Unix",
 				"name": "{% extends 'base.html' %}"
+			}
+		},
+		{
+			"file": "static/css/styles.css",
+			"settings":
+			{
+				"buffer_size": 2766,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -289,22 +277,6 @@
 			"settings":
 			{
 				"buffer_size": 514,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "templates/index.html",
-			"settings":
-			{
-				"buffer_size": 6104,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/dayInfo.html",
-			"settings":
-			{
-				"buffer_size": 3142,
 				"line_ending": "Windows"
 			}
 		},
@@ -333,6 +305,14 @@
 			}
 		},
 		{
+			"file": "templates/userPanel.html",
+			"settings":
+			{
+				"buffer_size": 2786,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "templates/resInfo.html",
 			"settings":
 			{
@@ -357,10 +337,21 @@
 			}
 		},
 		{
+			"contents": "To do:\n\n1) Information on resource, Name picture description etc: ACTIONING\n\n2) Block creation of events before \"today\": DONE\n\n3) Users view their own requests - probably via user panel: DONE\n\n4) As part of {1}, split app config into default and user configurable files: ACTIONING\n\n5) Admin can delete requests DONE\n\nExtension:\n\n1) Setup util, to set various things in userSettings",
 			"file": "TODO",
+			"file_size": 376,
+			"file_write_time": 1413474936000000,
 			"settings":
 			{
-				"buffer_size": 370,
+				"buffer_size": 381,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/index.html",
+			"settings":
+			{
+				"buffer_size": 6245,
 				"line_ending": "Unix"
 			}
 		},
@@ -368,31 +359,31 @@
 			"file": "templates/base.html",
 			"settings":
 			{
-				"buffer_size": 2130,
+				"buffer_size": 2255,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "static/css/styles.css",
+			"file": "templates/dayInfo.html",
 			"settings":
 			{
-				"buffer_size": 2752,
-				"line_ending": "Unix"
+				"buffer_size": 3326,
+				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 265.0,
+		"height": 392.0,
 		"selected_items":
 		[
 			[
-				"fig",
+				"fi",
 				"Figlet: Add Text"
 			],
 			[
-				"fi",
+				"fig",
 				"Figlet: Add Text"
 			],
 			[
@@ -408,7 +399,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -425,11 +416,6 @@
 	},
 	"file_history":
 	[
-		"/C/Python27/test.xml",
-		"/C/Users/Jonty/Desktop/usb/events.xml",
-		"/C/Python27/testEvents.xml",
-		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/userSettings-dev.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/testSettings.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
@@ -460,7 +446,9 @@
 		"/D/Library/Dropbox/py/RequestCalendar/templates/addUser.html",
 		"/D/Library/Documents/Job Applications/CV/CV2page.tex",
 		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/LaTeXTools-master/LaTeX.sublime-build",
-		"/D/Library/Dropbox/Work Backup/Project/Report/Report.tex"
+		"/D/Library/Dropbox/Work Backup/Project/Report/Report.tex",
+		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Jonty/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings"
 	],
 	"find":
 	{
@@ -522,7 +510,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 12,
 			"sheets":
 			[
 				{
@@ -558,15 +546,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 32315,
+						"buffer_size": 32808,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								18472,
-								18472
+								32748,
+								32748
 							]
 						],
 						"settings":
@@ -575,7 +563,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 10079.0,
+						"translation.y": 14717.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -585,15 +573,15 @@
 					"file": "templates/myRequests.html",
 					"settings":
 					{
-						"buffer_size": 2770,
+						"buffer_size": 3372,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								227,
-								53
+								1942,
+								1942
 							]
 						],
 						"settings":
@@ -603,13 +591,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1485.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
+					"file": "static/css/styles.css",
+					"settings":
+					{
+						"buffer_size": 2766,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								532,
+								532
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1530.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "static/js/functions.js",
 					"settings":
 					{
@@ -636,61 +651,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "templates/index.html",
-					"settings":
-					{
-						"buffer_size": 6104,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								307,
-								307
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 80.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 5,
-					"file": "templates/dayInfo.html",
-					"settings":
-					{
-						"buffer_size": 3142,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								239,
-								74
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -717,7 +678,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -745,7 +706,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "userSettings_dev.py",
 					"settings":
 					{
@@ -763,6 +724,33 @@
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "templates/userPanel.html",
+					"settings":
+					{
+						"buffer_size": 2786,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1691,
+								1691
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -856,15 +844,15 @@
 					"file": "TODO",
 					"settings":
 					{
-						"buffer_size": 370,
+						"buffer_size": 381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								304,
-								304
+								381,
+								381
 							]
 						],
 						"settings":
@@ -879,10 +867,37 @@
 				},
 				{
 					"buffer": 13,
+					"file": "templates/index.html",
+					"settings":
+					{
+						"buffer_size": 6245,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2956,
+								2956
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 881.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
 					"file": "templates/base.html",
 					"settings":
 					{
-						"buffer_size": 2130,
+						"buffer_size": 2255,
 						"regions":
 						{
 						},
@@ -905,28 +920,28 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
-					"file": "static/css/styles.css",
+					"buffer": 15,
+					"file": "templates/dayInfo.html",
 					"settings":
 					{
-						"buffer_size": 2752,
+						"buffer_size": 3326,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								584,
-								584
+								2679,
+								2679
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 900.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

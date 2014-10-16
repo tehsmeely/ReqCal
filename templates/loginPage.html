@@ -21,8 +21,8 @@
 			{% else %}
 			<form method="post" action="{{ url_for('login') }}">
 				<br>
-				Username: <input type="text" name="username">
-
+				Username: <input type="text" name="username" {% if prevName != none -%}value="{{prevName}}"{%- endif %}>
+				<br>
 				Password:  <input type="password" name="password">
 				<br>
 				{% if error %} <p>{{ error }}</p> {% endif %}
