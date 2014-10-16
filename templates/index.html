@@ -160,6 +160,9 @@
 							<td class="{% if (days[33] < 15) -%} other-month {%- endif %}">{{ days[33] }}</td>
 							<td class="{% if (days[34] < 15) -%} other-month {%- endif %}">{{ days[34] }}</td>
 						</tr>
+
+						<!-- also check if whole last row is needed, based on if item 35 is other-month -->
+						{% if (days[35] > 15) -%}
 						<tr>
 							<td class="{% if (days[35] < 15) -%} other-month {%- endif %}">{{ days[35] }}</td>
 							<td class="{% if (days[36] < 15) -%} other-month {%- endif %}">{{ days[36] }}</td>
@@ -169,6 +172,7 @@
 							<td class="{% if (days[40] < 15) -%} other-month {%- endif %}">{{ days[40] }}</td>
 							<td class="{% if (days[41] < 15) -%} other-month {%- endif %}">{{ days[41] }}</td>
 						</tr>
+						{% endif %}
 
 					</tbody>
 
