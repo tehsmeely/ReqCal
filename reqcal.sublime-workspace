@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"margin",
+				"margin-left"
+			],
+			[
 				"delete",
 				"deleteRequest"
 			],
@@ -251,7 +255,15 @@
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 32808,
+				"buffer_size": 33203,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "templates/loginPage.html",
+			"settings":
+			{
+				"buffer_size": 1145,
 				"line_ending": "Windows"
 			}
 		},
@@ -268,7 +280,23 @@
 			"file": "static/css/styles.css",
 			"settings":
 			{
-				"buffer_size": 2766,
+				"buffer_size": 2918,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/base.html",
+			"settings":
+			{
+				"buffer_size": 2239,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/index.html",
+			"settings":
+			{
+				"buffer_size": 6229,
 				"line_ending": "Unix"
 			}
 		},
@@ -337,29 +365,10 @@
 			}
 		},
 		{
-			"contents": "To do:\n\n1) Information on resource, Name picture description etc: ACTIONING\n\n2) Block creation of events before \"today\": DONE\n\n3) Users view their own requests - probably via user panel: DONE\n\n4) As part of {1}, split app config into default and user configurable files: ACTIONING\n\n5) Admin can delete requests DONE\n\nExtension:\n\n1) Setup util, to set various things in userSettings",
 			"file": "TODO",
-			"file_size": 376,
-			"file_write_time": 1413474936000000,
 			"settings":
 			{
 				"buffer_size": 381,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/index.html",
-			"settings":
-			{
-				"buffer_size": 6245,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templates/base.html",
-			"settings":
-			{
-				"buffer_size": 2255,
 				"line_ending": "Unix"
 			}
 		},
@@ -375,15 +384,19 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 265.0,
 		"selected_items":
 		[
 			[
-				"fi",
+				"fig",
 				"Figlet: Add Text"
 			],
 			[
-				"fig",
+				"fdig",
+				"Code Folding: Unfold All"
+			],
+			[
+				"fi",
 				"Figlet: Add Text"
 			],
 			[
@@ -399,7 +412,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 449.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -416,6 +429,7 @@
 	},
 	"file_history":
 	[
+		"/D/Library/Documents/Banished/BanishedKit_1.0.4.141003.Beta/resource/Dialog/StringTable.rsc",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/userSettings-dev.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/testSettings.py",
 		"/home/jonty/Dropbox/py/RequestCalendar/RequestCalendar/reqcal.sublime-project",
@@ -466,6 +480,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			">\n",
 			"id='ordify'",
 			"ordify",
 			"True",
@@ -510,7 +525,7 @@
 	"groups":
 	[
 		{
-			"selected": 12,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -546,15 +561,15 @@
 					"file": "webapp.py",
 					"settings":
 					{
-						"buffer_size": 32808,
+						"buffer_size": 33203,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								32748,
-								32748
+								17228,
+								17228
 							]
 						],
 						"settings":
@@ -563,13 +578,40 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 14717.0,
+						"translation.y": 8926.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "templates/loginPage.html",
+					"settings":
+					{
+						"buffer_size": 1145,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1123,
+								1123
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "templates/myRequests.html",
 					"settings":
 					{
@@ -591,25 +633,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1485.0,
+						"translation.y": 675.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "static/css/styles.css",
 					"settings":
 					{
-						"buffer_size": 2766,
+						"buffer_size": 2918,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								532,
-								532
+								1568,
+								1568
 							]
 						],
 						"settings":
@@ -618,13 +660,67 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1530.0,
+						"translation.y": 1390.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
+					"file": "templates/base.html",
+					"settings":
+					{
+						"buffer_size": 2239,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								737,
+								737
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "templates/index.html",
+					"settings":
+					{
+						"buffer_size": 6229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1611,
+								1611
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "static/js/functions.js",
 					"settings":
 					{
@@ -651,7 +747,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 8,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -678,7 +774,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 9,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -706,7 +802,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 10,
 					"file": "userSettings_dev.py",
 					"settings":
 					{
@@ -732,7 +828,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 11,
 					"file": "templates/userPanel.html",
 					"settings":
 					{
@@ -759,7 +855,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 12,
 					"file": "templates/resInfo.html",
 					"settings":
 					{
@@ -786,7 +882,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 13,
 					"file": "userSettings.py",
 					"settings":
 					{
@@ -812,7 +908,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 14,
 					"file": "defaultSettings.py",
 					"settings":
 					{
@@ -840,7 +936,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 15,
 					"file": "TODO",
 					"settings":
 					{
@@ -851,8 +947,8 @@
 						"selection":
 						[
 							[
-								381,
-								381
+								315,
+								315
 							]
 						],
 						"settings":
@@ -866,61 +962,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
-					"file": "templates/index.html",
-					"settings":
-					{
-						"buffer_size": 6245,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2956,
-								2956
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jinja2/Syntaxes/HTML (Jinja Templates).tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 881.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 14,
-					"file": "templates/base.html",
-					"settings":
-					{
-						"buffer_size": 2255,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1033,
-								1033
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
