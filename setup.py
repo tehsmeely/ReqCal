@@ -75,9 +75,26 @@ def setup():
 	##RESOURCE INFO
 	print "Setup information about the shared resource"
 
-	print "Enter a short paragraph descriptions for the resource, use '\\n' for newlines"
+	print "The description of the resource should be in a plaintext file in /static/resource/"
+	res_description = raw_input("Enter filename of description file: /static/resource/")
+
+
+	print "An image of the resource can also be used"
+	resp = getNYQ("Do you want to use an image?: ")
+	if resp == 1:
+		print "image should also be in /static/resource"
+		image_filename = raw_input("Enter filename of image file: /static/resource/")
+	elif resp == 0:
+		image_filename = None
+	else:
+		print "Exiting"
+		close(settingsFile)
+		sys.exit()
+
 
 	
+
+
 
 
 

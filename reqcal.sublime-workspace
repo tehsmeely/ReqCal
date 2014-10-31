@@ -4,16 +4,52 @@
 		"selected_items":
 		[
 			[
+				"see",
+				"settingsFile"
+			],
+			[
+				"E",
+				"Exiting"
+			],
+			[
+				"ima",
+				"image_filename"
+			],
+			[
+				"get",
+				"getNYQ"
+			],
+			[
+				"use",
+				"use_email"
+			],
+			[
+				"notifica",
+				"notification"
+			],
+			[
+				"no",
+				"notification"
+			],
+			[
+				"sett",
+				"settingsFile"
+			],
+			[
+				"sec",
+				"secret_key"
+			],
+			[
+				"secr",
+				"secret_key"
+			],
+			[
 				"margin",
 				"margin-left"
 			],
 			[
 				"delete",
 				"deleteRequest"
-			],
-			[
-				"get",
-				"getLogin"
 			],
 			[
 				"back",
@@ -46,10 +82,6 @@
 			[
 				"past",
 				"pastEvents"
-			],
-			[
-				"use",
-				"userEvents"
 			],
 			[
 				"user",
@@ -252,10 +284,27 @@
 			}
 		},
 		{
+			"file": "setup.py",
+			"settings":
+			{
+				"buffer_size": 3846,
+				"line_ending": "Windows",
+				"name": "##Setup process, simply goes through configuring u"
+			}
+		},
+		{
+			"file": "userSettings_dev.py",
+			"settings":
+			{
+				"buffer_size": 1639,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "webapp.py",
 			"settings":
 			{
-				"buffer_size": 33203,
+				"buffer_size": 33655,
 				"line_ending": "Windows"
 			}
 		},
@@ -325,14 +374,6 @@
 			}
 		},
 		{
-			"file": "userSettings_dev.py",
-			"settings":
-			{
-				"buffer_size": 1667,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "templates/userPanel.html",
 			"settings":
 			{
@@ -368,7 +409,7 @@
 			"file": "TODO",
 			"settings":
 			{
-				"buffer_size": 381,
+				"buffer_size": 383,
 				"line_ending": "Unix"
 			}
 		},
@@ -480,6 +521,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"resource",
 			">\n",
 			"id='ordify'",
 			"ordify",
@@ -525,7 +567,7 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -558,18 +600,71 @@
 				},
 				{
 					"buffer": 1,
-					"file": "webapp.py",
+					"file": "setup.py",
 					"settings":
 					{
-						"buffer_size": 33203,
+						"buffer_size": 3846,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17228,
-								17228
+								2897,
+								2897
+							]
+						],
+						"settings":
+						{
+							"auto_name": "##Setup process, simply goes through configuring u",
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "userSettings_dev.py",
+					"settings":
+					{
+						"buffer_size": 1639,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1391,
+								1391
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webapp.py",
+					"settings":
+					{
+						"buffer_size": 33655,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8211,
+								8211
 							]
 						],
 						"settings":
@@ -578,13 +673,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8926.0,
+						"translation.y": 3712.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 4,
 					"file": "templates/loginPage.html",
 					"settings":
 					{
@@ -611,7 +706,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "templates/myRequests.html",
 					"settings":
 					{
@@ -633,13 +728,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 675.0,
+						"translation.y": 243.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "static/css/styles.css",
 					"settings":
 					{
@@ -666,7 +761,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "templates/base.html",
 					"settings":
 					{
@@ -693,7 +788,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "templates/index.html",
 					"settings":
 					{
@@ -714,13 +809,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 918.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "static/js/functions.js",
 					"settings":
 					{
@@ -747,7 +842,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -768,13 +863,13 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 288.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -802,33 +897,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "userSettings_dev.py",
-					"settings":
-					{
-						"buffer_size": 1667,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1611,
-								1611
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "templates/userPanel.html",
 					"settings":
 					{
@@ -855,7 +924,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "templates/resInfo.html",
 					"settings":
 					{
@@ -882,7 +951,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "userSettings.py",
 					"settings":
 					{
@@ -908,7 +977,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "defaultSettings.py",
 					"settings":
 					{
@@ -936,19 +1005,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "TODO",
 					"settings":
 					{
-						"buffer_size": 381,
+						"buffer_size": 383,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								315,
-								315
+								383,
+								383
 							]
 						],
 						"settings":
@@ -962,7 +1031,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 17,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
