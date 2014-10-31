@@ -37,4 +37,4 @@ IMAGE_FILENAME = 'boat.png'
 
 ##Uncomment the below and add your custom descrition for the shared resource
 ## use \n for newlines as usual
-RES_DESCRIPTION= "DIS IS A BOAT\nTHIS IS ON A NEW LINE"
+RES_DESCRIPTION= "boat.txt"

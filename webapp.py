@@ -231,7 +231,21 @@ def dayInfoUpdate(year, month, day, user, status):
 def resInfo():
 	##resource info, serves page with customised info on the shared resource
 	image = app.config.get('IMAGE_FILENAME', None)
-	desc = app.config.get('RES_DESCRIPTION')
+	descFile = app.config.get('RES_DESCRIPTION')
+	fileLocation = os.path.join(os.getcwd(), "RequestCalendar", "static", "resource", descFile)
+	print ">>> resInfo, fileLocation: ", fileLocation
+	if os.path.isfile(fileLocation):
+		print ">>> resInfo, file is real, reading"
+		desc = ""
+		with open(fileLocation, "r") as f:
+			for line in f:
+				#desc += "<p>" + line + "</p>"
+				desc += line + "\n"
+		print ">>> resInfo, desc: ", desc
+	else:
+		desc = None	
+		print ">>> resInfo, no description"		
+
 
 	return render_template('resInfo.html', login=getLogin(), image=image, desc=desc)
 
