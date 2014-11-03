@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"not",
+				"notifications"
+			],
+			[
+				"user",
+				"userSettings_figlet"
+			],
+			[
+				"settings",
+				"settingsFile"
+			],
+			[
+				"image",
+				"image_filename"
+			],
+			[
+				"res",
+				"res_description"
+			],
+			[
+				"MAIL_",
+				"MAIL_PASSWORD"
+			],
+			[
+				"mail_us",
+				"mail_username"
+			],
+			[
+				"MAIL",
+				"MAIL_USERNAME"
+			],
+			[
+				"MAIL_USE",
+				"MAIL_USE_SSL"
+			],
+			[
+				"mail_use",
+				"mail_use_tls"
+			],
+			[
+				"file",
+				"file_addVar"
+			],
+			[
 				"see",
 				"settingsFile"
 			],
@@ -84,10 +128,6 @@
 				"pastEvents"
 			],
 			[
-				"user",
-				"userPanel"
-			],
-			[
 				"from",
 				"from_object"
 			],
@@ -134,10 +174,6 @@
 			[
 				"va",
 				"validUserList"
-			],
-			[
-				"not",
-				"notifyAll"
 			],
 			[
 				"sa",
@@ -287,9 +323,17 @@
 			"file": "setup.py",
 			"settings":
 			{
-				"buffer_size": 3846,
+				"buffer_size": 6227,
 				"line_ending": "Windows",
 				"name": "##Setup process, simply goes through configuring u"
+			}
+		},
+		{
+			"file": "userSettings2014-11-02.py",
+			"settings":
+			{
+				"buffer_size": 1568,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -393,7 +437,7 @@
 			"file": "userSettings.py",
 			"settings":
 			{
-				"buffer_size": 1568,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -603,30 +647,57 @@
 					"file": "setup.py",
 					"settings":
 					{
-						"buffer_size": 3846,
+						"buffer_size": 6227,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2897,
-								2897
+								1746,
+								1746
 							]
 						],
 						"settings":
 						{
 							"auto_name": "##Setup process, simply goes through configuring u",
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1080.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "userSettings2014-11-02.py",
+					"settings":
+					{
+						"buffer_size": 1568,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								761,
+								1
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "userSettings_dev.py",
 					"settings":
 					{
@@ -652,7 +723,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "webapp.py",
 					"settings":
 					{
@@ -679,7 +750,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "templates/loginPage.html",
 					"settings":
 					{
@@ -706,7 +777,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "templates/myRequests.html",
 					"settings":
 					{
@@ -734,7 +805,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
 					"file": "static/css/styles.css",
 					"settings":
 					{
@@ -761,7 +832,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "templates/base.html",
 					"settings":
 					{
@@ -788,7 +859,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "templates/index.html",
 					"settings":
 					{
@@ -815,7 +886,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "static/js/functions.js",
 					"settings":
 					{
@@ -842,7 +913,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "templates/adminPanel.html",
 					"settings":
 					{
@@ -869,7 +940,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "schema.sql",
 					"settings":
 					{
@@ -897,7 +968,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "templates/userPanel.html",
 					"settings":
 					{
@@ -924,7 +995,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "templates/resInfo.html",
 					"settings":
 					{
@@ -951,19 +1022,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
+					"buffer": 15,
 					"file": "userSettings.py",
 					"settings":
 					{
-						"buffer_size": 1568,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1292,
-								1292
+								0,
+								0
 							]
 						],
 						"settings":
@@ -977,7 +1048,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 15,
+					"buffer": 16,
 					"file": "defaultSettings.py",
 					"settings":
 					{
@@ -1005,7 +1076,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 16,
+					"buffer": 17,
 					"file": "TODO",
 					"settings":
 					{
@@ -1031,7 +1102,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
+					"buffer": 18,
 					"file": "templates/dayInfo.html",
 					"settings":
 					{
