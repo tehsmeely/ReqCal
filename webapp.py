@@ -234,17 +234,17 @@ def resInfo():
 	descFile = app.config.get('RES_DESCRIPTION')
 	fileLocation = os.path.join(os.getcwd(), "RequestCalendar", "static", "resource", descFile)
 	print ">>> resInfo, fileLocation: ", fileLocation
-	if os.path.isfile(fileLocation):
+	try:
 		print ">>> resInfo, file is real, reading"
 		desc = ""
-		with open(fileLocation, "r") as f:
+		with app.open_resource('static/resource/'+ descFile, "r") as f:
 			for line in f:
 				#desc += "<p>" + line + "</p>"
 				desc += line + "\n"
 		print ">>> resInfo, desc: ", desc
-	else:
+	except Exception as e:
 		desc = None	
-		print ">>> resInfo, no description"		
+		print ">>> resInfo, no description, E: ", e		
 
 
 	return render_template('resInfo.html', login=getLogin(), image=image, desc=desc)
@@ -257,6 +257,14 @@ def nl2br(eval_ctx, value):
     if eval_ctx.autoescape:
         result = Markup(result)
     return result
+
+##     ##  #######  ##    ## ######## ##     ##               ##    ##    ###    ##     ##
+###   ### ##     ## ###   ##    ##    ##     ##               ###   ##   ## ##   ##     ##
+#### #### ##     ## ####  ##    ##    ##     ##               ####  ##  ##   ##  ##     ##
+## ### ## ##     ## ## ## ##    ##    #########    #######    ## ## ## ##     ## ##     ##
+##     ## ##     ## ##  ####    ##    ##     ##               ##  #### #########  ##   ##
+##     ## ##     ## ##   ###    ##    ##     ##               ##   ### ##     ##   ## ##
+##     ##  #######  ##    ##    ##    ##     ##               ##    ## ##     ##    ###
 
 @app.route('/prevMonth')
 def prevMonth():
