@@ -22,7 +22,7 @@ def setup():
 
 	print "Welcome to user setup, this will prompt for config options"
 	print "and create a userSettings.py in this directory."
-	print "anything in userSettings will be overwriten but a backup"
+	print "anything in userSettings will be overwritten but a backup will be made"
 	print "\n"
 	if not getNY("Are you sure you want to continue with setup?: "):
 		print "Okay, Exiting"
@@ -91,6 +91,7 @@ def setup():
 		print "The following criteria are required for email setup: \n"
 		##MAIL_SERVER MAIL_USE_TLS MAIL_USE_SSL MAIL_USERNAME MAIL_PASSWORD
 		mail_server = raw_input("Enter a mail server: ") 
+		mail_port = raw_input("Enter the mail server port: ")
 		mail_use_tls = getTF("User TLS (t/f)?: ")
 		mail_use_ssl = getTF("User SSL (t/f)?: ")
 		mail_username = raw_input("Enter username for email: ") 
@@ -101,11 +102,12 @@ def setup():
 	elif resp == 0:
 		print "No notification system will be set"
 		use_email = False
-		mail_server = None
+		mail_server = ""
+		mail_port = None
 		mail_use_tls = None
 		mail_use_ssl = None
-		mail_username = None
-		mail_password = None
+		mail_username = ""
+		mail_password = ""
 		
 	else:
 		print "Exiting"
@@ -113,11 +115,12 @@ def setup():
 		sys.exit()
 
 	file_addVar(settingsFile, "USE_EMAIL", False)
-	file_addVar(settingsFile, "MAIL_SERVER", mail_server)
+	file_addVar(settingsFile, "MAIL_SERVER", mail_server, True)
+	file_addVar(settingsFile, "MAIL_PORT", mail_port)
 	file_addVar(settingsFile, "MAIL_USE_TLS", mail_use_tls)
 	file_addVar(settingsFile, "MAIL_USE_SSL", mail_use_ssl)
-	file_addVar(settingsFile, "MAIL_USERNAME", mail_username)
-	file_addVar(settingsFile, "MAIL_PASSWORD", mail_password)
+	file_addVar(settingsFile, "MAIL_USERNAME", mail_username, True)
+	file_addVar(settingsFile, "MAIL_PASSWORD", mail_password, True)
 
 
 	##RESOURCE INFO
@@ -147,6 +150,23 @@ def setup():
 		sys.exit()
 
 	file_addVar(settingsFile, "IMAGE_FILENAME", image_filename, True)
+
+
+
+
+
+
+	##Setup now finished. Tell user and close file
+
+	print "\n"
+	print "*" * 25
+	print "\n"
+	print "Setup is complete, see userSettings.py for your settings, and defaultSettings.py for any others that may be overwritten"
+
+
+	close(settingsFile)
+
+	return 0
 
 	
 
