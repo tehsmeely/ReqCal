@@ -31,6 +31,24 @@ Other users can then confirm or deny that request, and this effects the overall 
 * Admin panel: Allows admin to modify users and other aspects of siteapp
 
 
+###Users:
+Users can be created and have the same privilages: can create events, and vote on others.
+"Admin" Is a special user, admin can see all other users, and modify their details (can change but cannot see passwords as they are hashed).
+Admin can also delete any posts, and make them, but cannot vote on them and as such has no effect on the event status.
+
+
+
+###Setup:
+Distributions of the script is fairly simple, with the standard rollout process described [here](http://flask.pocoo.org/docs/0.10/deploying/#deployment)
+placing the Request calendar project in another directory titled Request Calendar, and adding a script reqcal.wsgi with a single line:
+```python
+from RequestCalendar import app as application
+```
+
+After this set up the resource information, get a picture and put it in static/resourse/. Also create a description plain text file
+
+
+
 ###Extension
 The requests are currently done on a day basis, and though this works for long boat trips, having better splitting of the day
 would be more helpful. Add customisable requerstbreakup (morning/afternoon/evening, or even hourly)
